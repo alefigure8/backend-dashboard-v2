@@ -3,7 +3,7 @@ const localStrategy = require('passport-local').Strategy;
 const auth = require('../libs/auth');
 const mysqlConnection = require('../database');
 const jwt = require('jsonwebtoken')
-const { SECRET } = require('../config')
+    //const { SECRET } = require('../config')
 
 passport.use('local.register', new localStrategy({
     usernameField: 'user',
