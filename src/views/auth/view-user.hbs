@@ -1,0 +1,20 @@
+<h3 class="category__title">Listado de usuarios</h2>
+
+
+<table class="table__content" id="table__content">
+  <tr class="table__content-title">
+    <th>Id</th>
+    <th>Name</th>
+    <th>User</th>
+    <th>Api Key</th>
+  </tr>
+  
+{{#each users}}
+  <tr class="table__content-body">
+    <td>{{id}}</td>
+    <td class="body__td-title"><a href="/user/update/{{id}}">{{name}}</a></td>
+    <td><a href="/user/update/{{id}}">{{user}}</a></td>
+    <td>{{api_key}}</td>
+  </tr>
+{{/each}}
+</table>
