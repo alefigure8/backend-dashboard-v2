@@ -7,7 +7,7 @@
         "babel-node": "babel-node --presets=latest",
         "dev": "nodemon --exec babel-node src/index.js",
         "build": "babel src -d build",
-        "start": "node build/index.js"
+        "start": "node src/index.js"
     },
     "keywords": [],
     "author": "Alejandrom Gomez Nieto",
