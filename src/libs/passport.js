@@ -19,7 +19,7 @@ passport.use('local.register', new localStrategy({
     newUser.password = await auth.encryptPassword(password)
     const result = await mysqlConnection.query('INSERT INTO users SET ?', [newUser]);
     newUser.id = result.insertId;
-    newUser.api_key = jwt.sign({ id: newUser.id }, SECRET, {})
+    newUser.api_key = jwt.sign({ id: newUser.id }, process.env.SECRET, {})
     await mysqlConnection.query('UPDATE users set api_key = ? WHERE id = ?', [newUser.api_key, newUser.id]);
     return done(null, newUser)
 }));

@@ -5,14 +5,16 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')
-    //const { database } = require('./keys')
+const { SECRET_PASSPORT } = require('../src/config')
 const passport = require('passport');
 var cors = require('cors')
+require('dotenv').config()
+
 
 //INIT
 const app = express();
-require('./libs/passport')
-app.use(cors())
+require('./libs/passport');
+app.use(cors());
 
 //SETTINGS
 app.set('views', path.join(__dirname, 'views'));
@@ -27,10 +29,15 @@ app.set('view engine', '.hbs');
 
 //MIDDLEWARES
 app.use(session({
-    secret: 'secretmysql',
+    secret: process.env.SECRET_PASSPORT,
     resave: false,
     saveUninitialized: false,
-    store: new MySQLStore(database)
+    store: new MySQLStore({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME
+    })
 }))
 app.use(morgan('dev'));
 app.use(express.json());
