@@ -4,9 +4,7 @@
     "description": "Portofolio",
     "main": "index.js",
     "scripts": {
-        "babel-node": "babel-node --presets=latest",
-        "dev": "nodemon --exec babel-node src/index.js",
-        "build": "babel src -d build",
+        "dev": "nodemon src/index.js",
         "start": "node src/index.js"
     },
     "keywords": [],
