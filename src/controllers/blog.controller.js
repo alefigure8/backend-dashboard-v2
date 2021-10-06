@@ -41,7 +41,7 @@ const createPost = async(req, res) => {
     };
 
     await mysqlConnection.query('INSERT INTO blog set ?', [new_post]);
-    res.redirect('/view')
+    res.redirect('/blog/view')
 };
 
 //UPDATE BLOG FORM
