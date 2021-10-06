@@ -56,11 +56,7 @@ app.use('/category', require('./routes/category'));
 app.use('/user', require('./routes/user'));
 app.use('/project', require('./routes/projects'));
 app.get('/', (req, res) => {
-    res.json({
-        author: pkg.author,
-        description: pkg.description,
-        version: pkg.version
-    });
+    res.redirect('/user')
 });
 
 //PUBLIC
