@@ -1,30 +1,33 @@
-const jwt = require('jsonwebtoken');
-const mysqlConnection = require('../database');
+const jwt = require('jsonwebtoken')
+const mysqlConnection = require('../database')
 require('dotenv').config()
 
-const verifyToken = async(req, res, next) => {
-    const token = req.headers["x-access-token"];
+const verifyToken = async (req, res, next) => {
+  const token = req.headers['x-access-token']
 
-    if (token) {
-        return jwt.verify(token, process.env.SECRET, async function(err, decoded) { //calback with error & decoded
-            if (err) {
-                return res.json({
-                    success: false,
-                    message: "Failed to authenticate token.",
-                });
-            }
+  if (token) {
+    return jwt.verify(token, process.env.SECRET, async function(err, decoded) {
+      // calback with error & decoded
+      if (err) {
+        return res.json({
+          success: false,
+          message: 'Failed to authenticate token.'
+        })
+      }
 
-            req.id = decoded.id;
+      req.id = decoded.id
 
-            const user = await mysqlConnection.query('SELECT id FROM users WHERE id = ?', [req.id]);
+      const user = await mysqlConnection.query(
+        'SELECT id FROM users WHERE id = ?',
+        [req.id]
+      )
 
-            if (user.length === 0) return res.status(404).json({ message: 'No user found' });
+      if (user.length === 0)
+        return res.status(404).json({message: 'No user found'})
 
-            return next();
-        });
-    }
+      return next()
+    })
+  }
 }
 
-
-
-module.exports = { verifyToken };
+module.exports = {verifyToken}

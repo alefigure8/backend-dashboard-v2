@@ -1,36 +1,47 @@
 {
-    "name": "backend",
-    "version": "1.0.0",
-    "description": "Portofolio",
-    "main": "index.js",
-    "scripts": {
-        "dev": "nodemon src/index.js",
-        "start": "node src/index.js"
-    },
-    "keywords": [],
-    "author": "Alejandrom Gomez Nieto",
-    "license": "ISC",
-    "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "cors": "^2.8.5",
-        "express": "^4.17.1",
-        "express-handlebars": "^5.3.3",
-        "express-mysql-session": "^2.1.7",
-        "express-session": "^1.17.2",
-        "helmet": "^4.6.0",
-        "jsonwebtoken": "^8.5.1",
-        "morgan": "^1.10.0",
-        "mysql": "^2.18.1",
-        "passport": "^0.4.1",
-        "passport-local": "^1.0.0",
-        "dotenv": "^10.0.0"
-    },
-    "devDependencies": {
-        "@babel/cli": "^7.15.4",
-        "@babel/core": "^7.15.5",
-        "@babel/node": "^7.15.4",
-        "@babel/preset-env": "^7.15.4",
-        "dotenv": "^10.0.0",
-        "nodemon": "^2.0.12"
-    }
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Portofolio",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "Alejandrom Gomez Nieto",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "ember": "^1.0.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.3",
+    "express-mysql-session": "^2.1.7",
+    "express-session": "^1.17.2",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.4",
+    "@s-ui/lint": "^3.39.0",
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.12"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  }
 }

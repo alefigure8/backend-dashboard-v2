@@ -1,81 +1,94 @@
-const mysqlConnection = require('../database');
+const mysqlConnection = require('../database')
 
-//API - GET ALL
-const getBlog = async(req, res) => {
-    const blogs = await mysqlConnection.query('SELECT * FROM blog');
-    res.json(blogs)
-};
-
-
-//API - GET JUST ONE
-const getEntry = async(req, res) => {
-    const { id } = req.params;
-    const blog = await mysqlConnection.query('SELECT * FROM blog WHERE id = ?', [id]);
-    res.json(blog)
-};
-
-//GET BLOG´S LIST
-const blogs = async(req, res) => {
-    const blogs = await mysqlConnection.query('SELECT blog.*, category.name FROM blog LEFT join category on blog.category = category.id');
-    res.render('./blog/blog', { blogs })
+// API - GET ALL
+const getBlog = async (req, res) => {
+  const blogs = await mysqlConnection.query('SELECT * FROM blog')
+  res.json(blogs)
 }
 
-//GET CREATE FORM
-const formBlog = async(req, res) => {
-    const category = await mysqlConnection.query('SELECT * FROM category');
-    const users = await mysqlConnection.query('SELECT * FROM users');
-    res.render('./blog/add-blog', { category, users })
-};
+// API - GET JUST ONE
+const getEntry = async (req, res) => {
+  const {id} = req.params
+  const blog = await mysqlConnection.query('SELECT * FROM blog WHERE id = ?', [
+    id
+  ])
+  await res.json(blog)
+}
 
-//POST ENTRY
-const createPost = async(req, res) => {
-    const { title, description, field, img, user, category } = req.body;
-    console.log(req.body)
-    const new_post = {
-        title,
-        description,
-        field,
-        img,
-        user,
-        category
-    };
+// GET BLOG´S LIST
+const blogs = async (req, res) => {
+  const blogs = await mysqlConnection.query(
+    'SELECT blog.*, category.name FROM blog LEFT join category on blog.category = category.id'
+  )
+  res.render('./blog/blog', {blogs})
+}
 
-    await mysqlConnection.query('INSERT INTO blog set ?', [new_post]);
-    res.redirect('/blog/view')
-};
+// GET CREATE FORM
+const formBlog = async (req, res) => {
+  const category = await mysqlConnection.query('SELECT * FROM category')
+  const users = await mysqlConnection.query('SELECT * FROM users')
+  res.render('./blog/add-blog', {category, users})
+}
 
-//UPDATE BLOG FORM
-const formUpdate = async(req, res) => {
-    const { id } = req.params;
-    const blogs = await mysqlConnection.query('SELECT * FROM blog WHERE id = ?', [id]);
-    const users = await mysqlConnection.query('SELECT * FROM users');
-    const category = await mysqlConnection.query('SELECT * FROM category');
+// POST ENTRY
+const createPost = async (req, res) => {
+  const {title, description, field, img, user, category} = req.body
+  const newPost = {
+    title,
+    description,
+    field,
+    img,
+    user,
+    category
+  }
 
-    res.render('./blog/update-blog', { blogs, users, category })
-};
+  await mysqlConnection.query('INSERT INTO blog set ?', [newPost])
+  res.redirect('/blog/view')
+}
 
-//POST UPDATE
-const postUpdate = async(req, res) => {
-    const { id } = req.params;
-    const { title, description, field, img, user, category } = req.body;
-    const new_post = {
-        title,
-        description,
-        field,
-        img,
-        user,
-        category
-    };
+// UPDATE BLOG FORM
+const formUpdate = async (req, res) => {
+  const {id} = req.params
+  const blogs = await mysqlConnection.query('SELECT * FROM blog WHERE id = ?', [
+    id
+  ])
+  const users = await mysqlConnection.query('SELECT * FROM users')
+  const category = await mysqlConnection.query('SELECT * FROM category')
 
-    await mysqlConnection.query('UPDATE blog set ? WHERE id = ?', [new_post, id]);
-    res.redirect('/blog/view')
-};
+  res.render('./blog/update-blog', {blogs, users, category})
+}
 
-//DELETE ENTRY
-const deleteEntry = async(req, res) => {
-    const { id } = req.params;
-    await mysqlConnection.query('DELETE FROM blog WHERE id = ?', [id]);
-    res.redirect('/blog/view')
-};
+// POST UPDATE
+const postUpdate = async (req, res) => {
+  const {id} = req.params
+  const {title, description, field, img, user, category} = req.body
+  const newPost = {
+    title,
+    description,
+    field,
+    img,
+    user,
+    category
+  }
 
-module.exports = { getBlog, getEntry, formBlog, createPost, formUpdate, postUpdate, deleteEntry, blogs };
+  await mysqlConnection.query('UPDATE blog set ? WHERE id = ?', [newPost, id])
+  res.redirect('/blog/view')
+}
+
+// DELETE ENTRY
+const deleteEntry = async (req, res) => {
+  const {id} = req.params
+  await mysqlConnection.query('DELETE FROM blog WHERE id = ?', [id])
+  res.redirect('/blog/view')
+}
+
+module.exports = {
+  getBlog,
+  getEntry,
+  formBlog,
+  createPost,
+  formUpdate,
+  postUpdate,
+  deleteEntry,
+  blogs
+}

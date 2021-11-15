@@ -1,33 +1,31 @@
-const mysql = require('mysql');
-const { promisify } = require('util');
+const mysql = require('mysql')
+const {promisify} = require('util')
 
 const mysqlConnection = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
-});
-
-mysqlConnection.getConnection((err, connection) => {
-    if (err) {
-        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-            console.error('DATABASE CONNECTION WAS CLOSED');
-        }
-        if (err.code === 'ER_CON_COUNT_ERROR') {
-            console.error('DATABASE HAS TOO MANY CONNECTIONS');
-        }
-        if (err.code === 'ECONNREFUSED') {
-            console.error('DATABASE CONNECTION WAS REFUSED');
-        }
-    }
-
-    if (connection) connection.release();
-
-    console.log('DB IS CONNECTED');
-
-    return;
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 })
 
-mysqlConnection.query = promisify(mysqlConnection.query); //Async await
+mysqlConnection.getConnection((err, connection) => {
+  if (err) {
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      console.error('DATABASE CONNECTION WAS CLOSED')
+    }
+    if (err.code === 'ER_CON_COUNT_ERROR') {
+      console.error('DATABASE HAS TOO MANY CONNECTIONS')
+    }
+    if (err.code === 'ECONNREFUSED') {
+      console.error('DATABASE CONNECTION WAS REFUSED')
+    }
+  }
 
-module.exports = mysqlConnection;
+  if (connection) connection.release()
+
+  return console.log('DB IS CONNECTED')
+})
+
+mysqlConnection.query = promisify(mysqlConnection.query) // Async await
+
+module.exports = mysqlConnection
