@@ -17,6 +17,21 @@ btnDown.forEach(btn => {
 
 /*
 =============== 
+token
+===============
+*/
+
+const tableContent = document.querySelectorAll('.table__content-body')
+tableContent.forEach(token => {
+  token.children[3].style.cursor = 'pointer'
+  token.children[3].addEventListener('click', e => {
+    token.children[3].style.color = '#99f'
+    navigator.clipboard.writeText(token.children[3].textContent)
+  })
+})
+
+/*
+=============== 
 Data Format
 ===============
 */

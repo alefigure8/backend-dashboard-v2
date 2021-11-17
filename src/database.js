@@ -22,8 +22,6 @@ mysqlConnection.getConnection((err, connection) => {
   }
 
   if (connection) connection.release()
-
-  return console.log('DB IS CONNECTED')
 })
 
 mysqlConnection.query = promisify(mysqlConnection.query) // Async await

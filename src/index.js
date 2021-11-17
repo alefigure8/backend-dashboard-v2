@@ -5,6 +5,4 @@ require('dotenv').config()
 app.set('port', process.env.PORT || 80)
 
 // LISTEN
-app.listen(app.get('port'), () => {
-  console.log('server on port', app.get('port'))
-})
+app.listen(app.get('port'))
