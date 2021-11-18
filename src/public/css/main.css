@@ -695,6 +695,9 @@ Spinner
     height: 100%;
     background-color: rgba(16, 16, 16, 0.5);
   }
+  .lds-ring-hide {
+      display: none;
+  }
   .lds-ring div {
     box-sizing: border-box;
     display: block;

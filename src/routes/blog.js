@@ -10,7 +10,6 @@ const {
   deleteEntry,
   blogs
 } = require('../controllers/blog.controller')
-
 const {isLoggedIn} = require('../libs/logged')
 const {verifyToken} = require('../middlewares/authjwt')
 

@@ -20,7 +20,6 @@ const blogs = async (req, res) => {
   const blogs = await mysqlConnection.query(
     'SELECT blog.*, category.name FROM blog LEFT join category on blog.category = category.id'
   )
-
   res.render('./blog/blog', {blogs})
 }
 
