@@ -1,0 +1,39 @@
+<h2>Category</h2>
+
+<h3 class="category__title">Añadir una nueva categoría</h2>
+
+<div class="main__category">
+    <form action="/category/add" method="POST" class="form__category">
+        <input type="text" name="name" id="categroy-name" placeholder="Añadir categoría">
+        <input type="text" name="img" id="category-img" placeholder="Añadir imagen. Max: 20x20px">
+        <button type="submit" class="btn btn-dark category__button">Crear</button>
+    </form>
+</div>
+
+<h3 class="category__title">Listado de categorías</h2>
+
+
+<table class="table__content">
+  <tr class="table__content-title">
+    <th>Id</th>
+    <th>Name</th>
+    <th>Imagen</th>
+    <th></th>
+  </tr>
+  
+{{#each category}}
+  <tr class="table__content-body">
+    <td>{{id}}</td>
+    <td class="body__td-title"><a href="/category/update/{{id}}">{{name}}</a></td>
+    <td class="category__table-img"><a href="{{img}}" target="_blank">{{img}}</a></td>
+    <td><a href="/category/delete/{{id}}" class="btn btn-danger">Delete</a></td>
+  </tr>
+
+
+{{else}}
+<p>Aú no hay entradas de blog</p>
+
+{{/each}}
+
+
+</table>

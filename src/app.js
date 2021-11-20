@@ -1,16 +1,24 @@
-const express = require('express')
-const morgan = require('morgan')
-const exphbs = require('express-handlebars')
-const path = require('path')
-const session = require('express-session')
-const MySQLStore = require('express-mysql-session')
-const passport = require('passport')
-const cors = require('cors')
-require('dotenv').config()
+import express from 'express'
+import morgan from 'morgan'
+import exphbs from 'express-handlebars'
+import path, {dirname} from 'path'
+import session from 'express-session'
+import MySQLStore from 'express-mysql-session'
+import passport from 'passport'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import routeBlogs from './routes/blog.js'
+import routeCategory from './routes/category.js'
+import routeUser from './routes/user.js'
+import routeProyect from './routes/projects.js'
+import {fileURLToPath} from 'url'
+import './libs/passport.js'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+dotenv.config()
 
 // INIT
 const app = express()
-require('./libs/passport')
 app.use(cors())
 
 // SETTINGS
@@ -54,10 +62,10 @@ app.use((req, res, next) => {
 })
 
 // ROUTES
-app.use('/blog', require('./routes/blog'))
-app.use('/category', require('./routes/category'))
-app.use('/user', require('./routes/user'))
-app.use('/project', require('./routes/projects'))
+app.use('/blog', routeBlogs)
+app.use('/category', routeCategory)
+app.use('/user', routeUser)
+app.use('/project', routeProyect)
 app.get('/', (req, res) => {
   res.redirect('/user')
 })
@@ -65,4 +73,4 @@ app.get('/', (req, res) => {
 // PUBLIC
 app.use(express.static(__dirname.concat('/public')))
 
-module.exports = app
+export default app

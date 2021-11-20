@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs')
+import bcrypt from 'bcryptjs'
 
 const auth = {}
 
@@ -17,4 +17,4 @@ auth.matchPassword = async (password, savedPassword) => {
   }
 }
 
-module.exports = auth
+export default auth

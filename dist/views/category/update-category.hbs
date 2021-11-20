@@ -1,0 +1,13 @@
+<h2>Category</h2>
+
+<h3 class="category__title">Añadir una nueva categoría</h2>
+
+<div class="main__category">
+    {{#each category}}
+    <form action="/category/update/{{id}}" method="POST" class="form__category">
+        <input type="text" name="name" id="categroy-name" placeholder="Añadir categoría" value="{{name}}">
+        <input type="text" name="img" id="category-img" placeholder="Añadir imagen. Max: 20x20px" value="{{img}}">
+        <button type="submit" class="btn btn-dark category__button">Actualizar</button>
+    </form>
+    {{/each}}
+</div>

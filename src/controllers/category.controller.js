@@ -1,13 +1,13 @@
-const mysqlConnection = require('../database')
+import mysqlConnection from '../database.js'
 
 // GET categories / private
-const getCategory = async (req, res) => {
+export const getCategory = async (req, res) => {
   const category = await mysqlConnection.query('SELECT * FROM category')
   res.json(category)
 }
 
 // GET ONLY ONE / private
-const getCategorybyId = async (req, res) => {
+export const getCategorybyId = async (req, res) => {
   const {id} = req.params
   const category = await mysqlConnection.query(
     'SELECT * FROM category WHERE id = ?',
@@ -17,13 +17,13 @@ const getCategorybyId = async (req, res) => {
 }
 
 // VIEW CATEGORY LIST
-const viewCategory = async (req, res) => {
+export const viewCategory = async (req, res) => {
   const category = await mysqlConnection.query('SELECT * FROM category')
   res.render('./category/category', {category})
 }
 
 // POST CREATE / PRIVATE
-const postCategory = async (req, res) => {
+export const postCategory = async (req, res) => {
   const {name, img} = req.body
   const newCategory = {
     name,
@@ -34,7 +34,7 @@ const postCategory = async (req, res) => {
 }
 
 // GET UPADATE / PRIVATE
-const updateCategorybyId = async (req, res) => {
+export const updateCategorybyId = async (req, res) => {
   const {id} = req.params
   const category = await mysqlConnection.query(
     'SELECT * FROM category WHERE id = ?',
@@ -44,7 +44,7 @@ const updateCategorybyId = async (req, res) => {
 }
 
 // POST UPADATE / PRIVATE
-const postCategorybyId = async (req, res) => {
+export const postCategorybyId = async (req, res) => {
   const {id} = req.params
   const {name, img} = req.body
   const updateCategory = {
@@ -60,18 +60,8 @@ const postCategorybyId = async (req, res) => {
 }
 
 // DELETE / PRIVATE
-const deleteCategory = async (req, res) => {
+export const deleteCategory = async (req, res) => {
   const {id} = req.params
   await mysqlConnection.query('DELETE FROM category WHERE id = ?', [id])
   res.redirect('/category/view')
-}
-
-module.exports = {
-  getCategory,
-  getCategorybyId,
-  postCategory,
-  updateCategorybyId,
-  postCategorybyId,
-  deleteCategory,
-  viewCategory
 }

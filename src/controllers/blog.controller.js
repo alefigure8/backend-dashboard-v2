@@ -1,13 +1,13 @@
-const mysqlConnection = require('../database')
+import mysqlConnection from '../database.js'
 
 // API - GET ALL
-const getBlog = async (req, res) => {
+export const getBlog = async (req, res) => {
   const blogs = await mysqlConnection.query('SELECT * FROM blog')
   res.json(blogs)
 }
 
 // API - GET JUST ONE
-const getEntry = async (req, res) => {
+export const getEntry = async (req, res) => {
   const {id} = req.params
   const blog = await mysqlConnection.query('SELECT * FROM blog WHERE id = ?', [
     id
@@ -16,7 +16,7 @@ const getEntry = async (req, res) => {
 }
 
 // GET BLOG´S LIST
-const blogs = async (req, res) => {
+export const blogs = async (req, res) => {
   const blogs = await mysqlConnection.query(
     'SELECT blog.*, category.name FROM blog LEFT join category on blog.category = category.id'
   )
@@ -24,14 +24,14 @@ const blogs = async (req, res) => {
 }
 
 // GET CREATE FORM
-const formBlog = async (req, res) => {
+export const formBlog = async (req, res) => {
   const category = await mysqlConnection.query('SELECT * FROM category')
   const users = await mysqlConnection.query('SELECT * FROM users')
   res.render('./blog/add-blog', {category, users})
 }
 
 // POST ENTRY
-const createPost = async (req, res) => {
+export const createPost = async (req, res) => {
   const {title, description, field, img, user, category} = req.body
   const newPost = {
     title,
@@ -47,7 +47,7 @@ const createPost = async (req, res) => {
 }
 
 // UPDATE BLOG FORM
-const formUpdate = async (req, res) => {
+export const formUpdate = async (req, res) => {
   const {id} = req.params
   const blogs = await mysqlConnection.query('SELECT * FROM blog WHERE id = ?', [
     id
@@ -59,7 +59,7 @@ const formUpdate = async (req, res) => {
 }
 
 // POST UPDATE
-const postUpdate = async (req, res) => {
+export const postUpdate = async (req, res) => {
   const {id} = req.params
   const {title, description, field, img, user, category} = req.body
   const newPost = {
@@ -76,19 +76,8 @@ const postUpdate = async (req, res) => {
 }
 
 // DELETE ENTRY
-const deleteEntry = async (req, res) => {
+export const deleteEntry = async (req, res) => {
   const {id} = req.params
   await mysqlConnection.query('DELETE FROM blog WHERE id = ?', [id])
   res.redirect('/blog/view')
-}
-
-module.exports = {
-  getBlog,
-  getEntry,
-  formBlog,
-  createPost,
-  formUpdate,
-  postUpdate,
-  deleteEntry,
-  blogs
 }
