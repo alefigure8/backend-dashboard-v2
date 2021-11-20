@@ -1,6 +1,5 @@
-const {Router} = require('express')
-const router = Router()
-const {
+import {Router} from 'express'
+import {
   getCategory,
   getCategorybyId,
   postCategory,
@@ -8,10 +7,11 @@ const {
   postCategorybyId,
   deleteCategory,
   viewCategory
-} = require('../controllers/category.controller')
+} from '../controllers/category.controller.js'
 
-const {isLoggedIn} = require('../libs/logged')
-const {verifyToken} = require('../middlewares/authjwt')
+import {isLoggedIn} from '../libs/logged.js'
+import {verifyToken} from '../middlewares/authjwt.js'
+const router = Router()
 
 // GET categories / private
 router.get('/all', verifyToken, getCategory)
@@ -33,4 +33,4 @@ router.post('/update/:id', isLoggedIn, postCategorybyId)
 // DELETE / PRIVATE
 router.get('/delete/:id', isLoggedIn, deleteCategory)
 
-module.exports = router
+export default router

@@ -1,12 +1,12 @@
-const {Router} = require('express')
-const router = Router()
-const {
+import {Router} from 'express'
+import {
   registerUser,
   LoginUser,
   listUser,
   deleteUser
-} = require('../controllers/user.controller')
-const {isLoggedIn} = require('../libs/logged')
+} from '../controllers/user.controller.js'
+import {isLoggedIn} from '../libs/logged.js'
+const router = Router()
 
 // LOGIN VIEW
 router.get('/', (req, res) => {
@@ -35,4 +35,4 @@ router.get('/logout', isLoggedIn, (req, res) => {
   res.redirect('/user')
 })
 
-module.exports = router
+export default router

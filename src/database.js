@@ -1,5 +1,7 @@
-const mysql = require('mysql')
-const {promisify} = require('util')
+import mysql from 'mysql'
+import {promisify} from 'util'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const mysqlConnection = mysql.createPool({
   host: process.env.DB_HOST,
@@ -26,4 +28,4 @@ mysqlConnection.getConnection((err, connection) => {
 
 mysqlConnection.query = promisify(mysqlConnection.query) // Async await
 
-module.exports = mysqlConnection
+export default mysqlConnection

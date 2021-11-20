@@ -1,12 +1,12 @@
-const passport = require('passport')
-const localStrategy = require('passport-local').Strategy
-const auth = require('../libs/auth')
-const mysqlConnection = require('../database')
-const jwt = require('jsonwebtoken')
+import passport from 'passport'
+import localStrategy from 'passport-local'
+import auth from '../libs/auth.js'
+import mysqlConnection from '../database.js'
+import jwt from 'jsonwebtoken'
 
 passport.use(
   'local.register',
-  new localStrategy(
+  new localStrategy.Strategy(
     {
       usernameField: 'user',
       passwordField: 'password',
@@ -36,7 +36,7 @@ passport.use(
 
 passport.use(
   'local.login',
-  new localStrategy(
+  new localStrategy.Strategy(
     {
       usernameField: 'user',
       passwordField: 'password',

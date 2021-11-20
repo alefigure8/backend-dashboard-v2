@@ -1,6 +1,7 @@
-const jwt = require('jsonwebtoken')
-const mysqlConnection = require('../database')
-require('dotenv').config()
+import jwt from 'jsonwebtoken'
+import mysqlConnection from '../database.js'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const verifyToken = async (req, res, next) => {
   const token = req.headers['x-access-token']
@@ -30,4 +31,4 @@ const verifyToken = async (req, res, next) => {
   }
 }
 
-module.exports = {verifyToken}
+export {verifyToken}

@@ -1,6 +1,5 @@
-const {Router} = require('express')
-const router = Router()
-const {
+import {Router} from 'express'
+import {
   getProject,
   getProjectbyId,
   createProject,
@@ -9,10 +8,11 @@ const {
   updateProject,
   deleteProject,
   viewProject
-} = require('../controllers/project.controller')
+} from '../controllers/project.controller.js'
 
-const {isLoggedIn} = require('../libs/logged')
-const {verifyToken} = require('../middlewares/authjwt')
+import {isLoggedIn} from '../libs/logged.js'
+import {verifyToken} from '../middlewares/authjwt.js'
+const router = Router()
 
 // API - GET ALL PROJECT
 router.get('/all', verifyToken, getProject)
@@ -38,4 +38,4 @@ router.post('/update/:id', isLoggedIn, updateProject)
 // DELETE PROJECT
 router.get('/delete/:id', isLoggedIn, deleteProject)
 
-module.exports = router
+export default router

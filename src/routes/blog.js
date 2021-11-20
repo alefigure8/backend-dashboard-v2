@@ -1,6 +1,5 @@
-const {Router} = require('express')
-const router = Router()
-const {
+import {Router} from 'express'
+import {
   getBlog,
   getEntry,
   createPost,
@@ -9,10 +8,10 @@ const {
   postUpdate,
   deleteEntry,
   blogs
-} = require('../controllers/blog.controller')
-
-const {isLoggedIn} = require('../libs/logged')
-const {verifyToken} = require('../middlewares/authjwt')
+} from '../controllers/blog.controller.js'
+import {isLoggedIn} from '../libs/logged.js'
+import {verifyToken} from '../middlewares/authjwt.js'
+const router = Router()
 
 // GET ENTRIES / PUBLIC
 router.get('/all', verifyToken, getBlog)
@@ -38,4 +37,4 @@ router.post('/update/:id', isLoggedIn, postUpdate)
 // DELETE / PRIVATE
 router.get('/delete/:id', isLoggedIn, deleteEntry)
 
-module.exports = router
+export default router
