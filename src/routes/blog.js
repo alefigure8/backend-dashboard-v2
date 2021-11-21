@@ -11,6 +11,7 @@ import {
 } from '../controllers/blog.controller.js'
 import {isLoggedIn} from '../libs/logged.js'
 import {verifyToken} from '../middlewares/authjwt.js'
+
 const router = Router()
 
 // GET ENTRIES / PUBLIC

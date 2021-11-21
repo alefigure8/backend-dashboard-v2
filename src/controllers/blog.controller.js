@@ -32,7 +32,9 @@ export const formBlog = async (req, res) => {
 
 // POST ENTRY
 export const createPost = async (req, res) => {
-  const {title, description, field, img, user, category} = req.body
+  const img = `/public/img/${req.file.filename}`
+  console.log(img)
+  const {title, description, field, user, category} = req.body
   const newPost = {
     title,
     description,

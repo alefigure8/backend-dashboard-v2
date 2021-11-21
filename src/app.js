@@ -12,13 +12,15 @@ import routeCategory from './routes/category.js'
 import routeUser from './routes/user.js'
 import routeProyect from './routes/projects.js'
 import {fileURLToPath} from 'url'
+import fs from 'fs'
+import multer from 'multer'
 import './libs/passport.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 dotenv.config()
 
 // INIT
-const app = express()
+export const app = express()
 app.use(cors())
 
 // SETTINGS
@@ -33,6 +35,18 @@ app.engine(
   })
 )
 app.set('view engine', '.hbs')
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, 'public/img'))
+  },
+  filename: (req, file, cb)=>{
+    const ext = file.mimetype.split("/")[1]
+      cb(null, file.fieldname + '-' + Date.now()+ '.' + ext)
+  }
+})
+
+const upload = multer({ storage: storage })
 
 // MIDDLEWARES
 app.use(
@@ -62,7 +76,7 @@ app.use((req, res, next) => {
 })
 
 // ROUTES
-app.use('/blog', routeBlogs)
+app.use('/blog', upload.single('image'), routeBlogs)
 app.use('/category', routeCategory)
 app.use('/user', routeUser)
 app.use('/project', routeProyect)
@@ -72,5 +86,3 @@ app.get('/', (req, res) => {
 
 // PUBLIC
 app.use(express.static(__dirname.concat('/public')))
-
-export default app

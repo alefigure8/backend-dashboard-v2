@@ -8,7 +8,7 @@
 
 <h4 class="blog__title">Añadir una nueva entrada</h4>
 <div class="main__blog"></div>
-    <form action="/blog/add" method="POST" class="blog__form">
+    <form action="/blog/add" method="POST" class="blog__form" enctype="multipart/form-data">
         <div class="form__content-left">
 
             <input type="text" name="title" class="form-group" id="blog-title" placeholder="Añadir el título">
@@ -33,6 +33,7 @@
                 <div class="card-body card-body-form">
                     <h4>Imágenes</h4>
                     <input type="text" name="img" id="blog-img" placeholder="Añadir link">
+                    <input type="file" name="image" id="blog-img">
                 </div>
             </div>
             <div class="card card-form">
