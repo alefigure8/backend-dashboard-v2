@@ -12,11 +12,10 @@ import routeCategory from './routes/category.js'
 import routeUser from './routes/user.js'
 import routeProyect from './routes/projects.js'
 import {fileURLToPath} from 'url'
-import fs from 'fs'
-import multer from 'multer'
 import './libs/passport.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
+import multer from 'multer'
 dotenv.config()
 
 // INIT
@@ -35,18 +34,6 @@ app.engine(
   })
 )
 app.set('view engine', '.hbs')
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, 'public/img'))
-  },
-  filename: (req, file, cb)=>{
-    const ext = file.mimetype.split("/")[1]
-      cb(null, file.fieldname + '-' + Date.now()+ '.' + ext)
-  }
-})
-
-const upload = multer({ storage: storage })
 
 // MIDDLEWARES
 app.use(
@@ -68,6 +55,18 @@ app.use(express.urlencoded({extended: false}))
 app.use(passport.initialize())
 app.use(passport.session())
 app.disable('etag')
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, 'public/img'))
+  },
+  filename: (req, file, cb)=>{
+    const ext = file.mimetype.split("/")[1]
+      cb(null, file.fieldname + '-' + Date.now()+ '.' + ext)
+  }
+})
+
+const upload = multer({ storage: storage })
 
 // GLOBAL VARIABLES
 app.use((req, res, next) => {

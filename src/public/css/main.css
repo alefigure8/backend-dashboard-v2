@@ -628,6 +628,10 @@ ADD BLOG
     text-align: center;
 }
 
+.img-view{
+    width: 100%;
+}
+
 
 /*
 Category

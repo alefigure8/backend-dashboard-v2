@@ -32,8 +32,7 @@ export const formBlog = async (req, res) => {
 
 // POST ENTRY
 export const createPost = async (req, res) => {
-  const img = `/public/img/${req.file.filename}`
-  console.log(img)
+  const img = `/img/${req.file.filename}`
   const {title, description, field, user, category} = req.body
   const newPost = {
     title,
@@ -62,8 +61,10 @@ export const formUpdate = async (req, res) => {
 
 // POST UPDATE
 export const postUpdate = async (req, res) => {
+  //const img = `/img/${req.file.filename}`
+  const img = `/img/${req.file.filename}`
   const {id} = req.params
-  const {title, description, field, img, user, category} = req.body
+  const {title, description, field, user, category} = req.body
   const newPost = {
     title,
     description,
