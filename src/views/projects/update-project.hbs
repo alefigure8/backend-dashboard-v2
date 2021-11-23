@@ -9,7 +9,7 @@
 <h4 class="blog__title">Añadir un nuevo proyecto</h4>
 <div class="main__blog"></div>
 {{#each projects}}
-    <form action="/project/update/{{id}}" method="POST" class="blog__form">
+    <form action="/project/update/{{id}}" method="POST" class="blog__form" enctype = "multipart/form-data">
         <div class="form__content-left">
 
             <input type="text" name="title" class="form-group" id="blog-title" placeholder="Añadir el título" value="{{title}}">
@@ -31,7 +31,12 @@
             <div class="card card-form">
                 <div class="card-body card-body-form">
                     <h4>Imágenes</h4>
+                    <img class="img-view" src="{{img}}" />
                     <input type="text" name="img" id="blog-img" placeholder="Añadir link" value="{{img}}">
+                    <label class="custom-file-upload btn btn-dark btn-form">
+                        <input type="file" name="image" id="blog-img">
+                        Select File
+                    </label>
                 </div>
             </div>
             <div class="card card-form">

@@ -7,6 +7,10 @@
     <form action="/category/update/{{id}}" method="POST" class="form__category">
         <input type="text" name="name" id="categroy-name" placeholder="Añadir categoría" value="{{name}}">
         <input type="text" name="img" id="category-img" placeholder="Añadir imagen. Max: 20x20px" value="{{img}}">
+         <label class="custom-file-upload btn btn-dark category__button">
+        <input type="file" name="image" id="blog-img">
+        Select File
+        </label>
         <button type="submit" class="btn btn-dark category__button">Actualizar</button>
     </form>
     {{/each}}

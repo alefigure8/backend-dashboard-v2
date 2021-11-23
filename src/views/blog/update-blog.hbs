@@ -9,7 +9,7 @@
 <h4 class="blog__title">Editar entrada</h4>
 <div class="main__blog"></div>
 {{#each blogs}}
-    <form action="/blog/update/{{id}}" method="POST" class="blog__form">
+    <form action="/blog/update/{{id}}" method="POST" class="blog__form" enctype = "multipart/form-data">
         <div class="form__content-left">
             <input type="text" name="title" class="form-group" id="blog-title" value="{{title}}" placeholder="Añadir el título">
 
@@ -35,7 +35,10 @@
                     <h4>Imágenes</h4>
                     <img class="img-view" src="{{img}}" />
                     <input type="text" name="img" id="blog-img" value="{{img}}" placeholder="Añadir link">
-                    <input type="file" name="image" id="blog-img">
+                     <label class="custom-file-upload btn btn-dark btn-form">
+                        <input type="file" name="image" id="blog-img">
+                        Select File
+                    </label>
                 </div>
 
             </div>

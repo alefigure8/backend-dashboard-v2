@@ -74,19 +74,3 @@ if (categoryTableImgElement !== null) {
     categoryTable.textContent = `${substr}...`
   })
 }
-
-/*
-=============== 
-CATEGORY TRIM
-===============
-*/
-
-const showLoading = () => {
-  document.getElementById('lds-ringy').classList.add('active')
-}
-
-const hideLoading = () => {
-  document.getElementById('lds-ring').classList.remove('active')
-}
-
-module.exports = {showLoading, hideLoading}

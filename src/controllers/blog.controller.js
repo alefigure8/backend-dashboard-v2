@@ -32,19 +32,25 @@ export const formBlog = async (req, res) => {
 
 // POST ENTRY
 export const createPost = async (req, res) => {
-  const img = `/img/${req.file.filename}`
-  const {title, description, field, user, category} = req.body
-  const newPost = {
-    title,
-    description,
-    field,
-    img,
-    user,
-    category
-  }
+  try {
+    const img = `/img/${req.file.filename}`
+    const {title, description, field, user, category} = req.body
+    const newPost = {
+      title,
+      description,
+      field,
+      img,
+      user,
+      category
+    }
 
-  await mysqlConnection.query('INSERT INTO blog set ?', [newPost])
-  res.redirect('/blog/view')
+    await mysqlConnection.query('INSERT INTO blog set ?', [newPost])
+    res.redirect('/blog/view')
+  } catch (error) {
+    res.status(401).send({
+      message: `Error: ${error}`
+    })
+  }
 }
 
 // UPDATE BLOG FORM
@@ -61,21 +67,25 @@ export const formUpdate = async (req, res) => {
 
 // POST UPDATE
 export const postUpdate = async (req, res) => {
-  //const img = `/img/${req.file.filename}`
-  const img = `/img/${req.file.filename}`
-  const {id} = req.params
-  const {title, description, field, user, category} = req.body
-  const newPost = {
-    title,
-    description,
-    field,
-    img,
-    user,
-    category
+  try {
+    const img = `/img/${req.file.filename}`
+    const {id} = req.params
+    const {title, description, field, user, category} = req.body
+    const newPost = {
+      title,
+      description,
+      field,
+      img,
+      user,
+      category
+    }
+      await mysqlConnection.query('UPDATE blog set ? WHERE id = ?', [newPost, id])
+      res.redirect('/blog/view')
+  } catch (error) {
+    res.status(401).send({
+      message: `Error: ${error}`
+  })
   }
-
-  await mysqlConnection.query('UPDATE blog set ? WHERE id = ?', [newPost, id])
-  res.redirect('/blog/view')
 }
 
 // DELETE ENTRY
