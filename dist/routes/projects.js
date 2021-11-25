@@ -1,22 +1,34 @@
-import { Router } from 'express';
-import { getProject, getProjectbyId, createProject, postProject, updateProjectbyId, updateProject, deleteProject, viewProject } from '../controllers/project.controller.js';
-import { isLoggedIn } from '../libs/logged.js';
-import { verifyToken } from '../middlewares/authjwt.js';
-const router = Router(); // API - GET ALL PROJECT
+"use strict";
 
-router.get('/all', verifyToken, getProject); // API - GET JUST ONE BY ID
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-router.get('/all/:id', verifyToken, getProjectbyId); // GET PROJECT´S LIST
+var _express = require("express");
 
-router.get('/view', isLoggedIn, viewProject); // GET CREATE PROJECT FORM
+var _projectController = require("../controllers/project.controller.js");
 
-router.get('/add', isLoggedIn, createProject); // POST NEW PROJECT
+var _logged = require("../libs/logged.js");
 
-router.post('/add', isLoggedIn, postProject); // GET UPDATE PROJECT FORM
+var _authjwt = require("../middlewares/authjwt.js");
 
-router.get('/update/:id', isLoggedIn, updateProjectbyId); // POST UPDATE
+const router = (0, _express.Router)(); // API - GET ALL PROJECT
 
-router.post('/update/:id', isLoggedIn, updateProject); // DELETE PROJECT
+router.get('/all', _authjwt.verifyToken, _projectController.getProject); // API - GET JUST ONE BY ID
 
-router.get('/delete/:id', isLoggedIn, deleteProject);
-export default router;
+router.get('/all/:id', _authjwt.verifyToken, _projectController.getProjectbyId); // GET PROJECT´S LIST
+
+router.get('/view', _logged.isLoggedIn, _projectController.viewProject); // GET CREATE PROJECT FORM
+
+router.get('/add', _logged.isLoggedIn, _projectController.createProject); // POST NEW PROJECT
+
+router.post('/add', _logged.isLoggedIn, _projectController.postProject); // GET UPDATE PROJECT FORM
+
+router.get('/update/:id', _logged.isLoggedIn, _projectController.updateProjectbyId); // POST UPDATE
+
+router.post('/update/:id', _logged.isLoggedIn, _projectController.updateProject); // DELETE PROJECT
+
+router.get('/delete/:id', _logged.isLoggedIn, _projectController.deleteProject);
+var _default = router;
+exports.default = _default;

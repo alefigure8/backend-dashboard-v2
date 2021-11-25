@@ -1,64 +1,94 @@
-import mysqlConnection from '../database.js'; // API - GET ALL
+"use strict";
 
-export const getProject = async (req, res) => {
-  const projects = await mysqlConnection.query('SELECT * FROM project');
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deleteProject = exports.updateProject = exports.updateProjectbyId = exports.postProject = exports.createProject = exports.viewProject = exports.getProjectbyId = exports.getProject = void 0;
+
+var _database = _interopRequireDefault(require("../database.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// API - GET ALL
+const getProject = async (req, res) => {
+  const projects = await _database.default.query('SELECT * FROM project');
   res.json(projects);
 }; // API - GET JUST ONE BY ID
 
-export const getProjectbyId = async (req, res) => {
+
+exports.getProject = getProject;
+
+const getProjectbyId = async (req, res) => {
   const {
     id
   } = req.params;
-  const project = await mysqlConnection.query('SELECT * FROM project WHERE id = ?', [id]);
+  const project = await _database.default.query('SELECT * FROM project WHERE id = ?', [id]);
   res.json(project);
 }; // GET PROJECT´S LIST
 
-export const viewProject = async (req, res) => {
-  const projects = await mysqlConnection.query('SELECT project.*, category.name FROM project LEFT join category on project.category = category.id');
+
+exports.getProjectbyId = getProjectbyId;
+
+const viewProject = async (req, res) => {
+  const projects = await _database.default.query('SELECT project.*, category.name FROM project LEFT join category on project.category = category.id');
   res.render('./projects/view-projects', {
     projects
   });
 }; // GET PROJECT CREATE FORM
 
-export const createProject = async (req, res) => {
-  const category = await mysqlConnection.query('SELECT * FROM category');
+
+exports.viewProject = viewProject;
+
+const createProject = async (req, res) => {
+  const category = await _database.default.query('SELECT * FROM category');
   res.render('./projects/add-project', {
     category
   });
 }; // POST PROJECT ENTRY
 
-export const postProject = async (req, res) => {
+
+exports.createProject = createProject;
+
+const postProject = async (req, res) => {
+  const img = `/img/${req.file.filename}`;
   const {
     title,
     description,
     category,
-    img,
     link
   } = req.body;
   const newPost = {
     title,
     description,
+    img,
     category,
     img,
     link
   };
-  await mysqlConnection.query('INSERT INTO project set ?', [newPost]);
+  await _database.default.query('INSERT INTO project set ?', [newPost]);
   res.redirect('/project/view');
 }; // UPDATE PROYECT FORM
 
-export const updateProjectbyId = async (req, res) => {
+
+exports.postProject = postProject;
+
+const updateProjectbyId = async (req, res) => {
   const {
     id
   } = req.params;
-  const projects = await mysqlConnection.query('SELECT * FROM project WHERE id = ?', [id]);
-  const category = await mysqlConnection.query('SELECT * FROM category');
+  const projects = await _database.default.query('SELECT * FROM project WHERE id = ?', [id]);
+  const category = await _database.default.query('SELECT * FROM category');
   res.render('./projects/update-project', {
     projects,
     category
   });
 }; // POST UPDATE
 
-export const updateProject = async (req, res) => {
+
+exports.updateProjectbyId = updateProjectbyId;
+
+const updateProject = async (req, res) => {
+  const img = `/img/${req.file.filename}`;
   const {
     id
   } = req.params;
@@ -66,7 +96,6 @@ export const updateProject = async (req, res) => {
     title,
     description,
     category,
-    img,
     link
   } = req.body;
   const newPost = {
@@ -76,14 +105,19 @@ export const updateProject = async (req, res) => {
     img,
     link
   };
-  await mysqlConnection.query('UPDATE project set ? WHERE id = ?', [newPost, id]);
+  await _database.default.query('UPDATE project set ? WHERE id = ?', [newPost, id]);
   res.redirect('/project/view');
 }; // DELETE ENTRY
 
-export const deleteProject = async (req, res) => {
+
+exports.updateProject = updateProject;
+
+const deleteProject = async (req, res) => {
   const {
     id
   } = req.params;
-  await mysqlConnection.query('DELETE FROM project WHERE id = ?', [id]);
+  await _database.default.query('DELETE FROM project WHERE id = ?', [id]);
   res.redirect('/project/view');
 };
+
+exports.deleteProject = deleteProject;

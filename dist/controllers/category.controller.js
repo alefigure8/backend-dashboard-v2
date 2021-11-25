@@ -1,68 +1,98 @@
-import mysqlConnection from '../database.js'; // GET categories / private
+"use strict";
 
-export const getCategory = async (req, res) => {
-  const category = await mysqlConnection.query('SELECT * FROM category');
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deleteCategory = exports.postCategorybyId = exports.updateCategorybyId = exports.postCategory = exports.viewCategory = exports.getCategorybyId = exports.getCategory = void 0;
+
+var _database = _interopRequireDefault(require("../database.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// GET categories / private
+const getCategory = async (req, res) => {
+  const category = await _database.default.query('SELECT * FROM category');
   res.json(category);
 }; // GET ONLY ONE / private
 
-export const getCategorybyId = async (req, res) => {
+
+exports.getCategory = getCategory;
+
+const getCategorybyId = async (req, res) => {
   const {
     id
   } = req.params;
-  const category = await mysqlConnection.query('SELECT * FROM category WHERE id = ?', [id]);
+  const category = await _database.default.query('SELECT * FROM category WHERE id = ?', [id]);
   res.json(category);
 }; // VIEW CATEGORY LIST
 
-export const viewCategory = async (req, res) => {
-  const category = await mysqlConnection.query('SELECT * FROM category');
+
+exports.getCategorybyId = getCategorybyId;
+
+const viewCategory = async (req, res) => {
+  const category = await _database.default.query('SELECT * FROM category');
   res.render('./category/category', {
     category
   });
 }; // POST CREATE / PRIVATE
 
-export const postCategory = async (req, res) => {
+
+exports.viewCategory = viewCategory;
+
+const postCategory = async (req, res) => {
   const {
-    name,
-    img
+    name
   } = req.body;
+  const img = `/img/${req.file.filename}`;
   const newCategory = {
     name,
     img
   };
-  await mysqlConnection.query('INSERT INTO category set ?', [newCategory]);
+  await _database.default.query('INSERT INTO category set ?', [newCategory]);
   res.redirect('/category/view');
 }; // GET UPADATE / PRIVATE
 
-export const updateCategorybyId = async (req, res) => {
+
+exports.postCategory = postCategory;
+
+const updateCategorybyId = async (req, res) => {
   const {
     id
   } = req.params;
-  const category = await mysqlConnection.query('SELECT * FROM category WHERE id = ?', [id]);
+  const category = await _database.default.query('SELECT * FROM category WHERE id = ?', [id]);
   res.render('./category/update-category', {
     category
   });
 }; // POST UPADATE / PRIVATE
 
-export const postCategorybyId = async (req, res) => {
+
+exports.updateCategorybyId = updateCategorybyId;
+
+const postCategorybyId = async (req, res) => {
   const {
     id
   } = req.params;
+  const img = `/img/${req.file.filename}`;
   const {
-    name,
-    img
+    name
   } = req.body;
   const updateCategory = {
     name,
     img
   };
-  await mysqlConnection.query('UPDATE category set ? WHERE ID = ?', [updateCategory, id]);
+  await _database.default.query('UPDATE category set ? WHERE ID = ?', [updateCategory, id]);
   res.redirect('/category/view');
 }; // DELETE / PRIVATE
 
-export const deleteCategory = async (req, res) => {
+
+exports.postCategorybyId = postCategorybyId;
+
+const deleteCategory = async (req, res) => {
   const {
     id
   } = req.params;
-  await mysqlConnection.query('DELETE FROM category WHERE id = ?', [id]);
+  await _database.default.query('DELETE FROM category WHERE id = ?', [id]);
   res.redirect('/category/view');
 };
+
+exports.deleteCategory = deleteCategory;

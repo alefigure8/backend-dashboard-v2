@@ -1,13 +1,27 @@
-import mysql from 'mysql';
-import { promisify } from 'util';
-import dotenv from 'dotenv';
-dotenv.config();
-const mysqlConnection = mysql.createPool({
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _mysql = _interopRequireDefault(require("mysql"));
+
+var _util = require("util");
+
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_dotenv.default.config();
+
+const mysqlConnection = _mysql.default.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME
 });
+
 mysqlConnection.getConnection((err, connection) => {
   if (err) {
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
@@ -25,6 +39,7 @@ mysqlConnection.getConnection((err, connection) => {
 
   if (connection) connection.release();
 });
-mysqlConnection.query = promisify(mysqlConnection.query); // Async await
+mysqlConnection.query = (0, _util.promisify)(mysqlConnection.query); // Async await
 
-export default mysqlConnection;
+var _default = mysqlConnection;
+exports.default = _default;

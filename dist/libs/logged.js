@@ -1,4 +1,12 @@
-import 'passport';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isLoggedIn = isLoggedIn;
+exports.isNotLoggedin = isNotLoggedin;
+
+require("passport");
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -15,5 +23,3 @@ function isNotLoggedin(req, res, next) {
     return res.redirect('/user');
   }
 }
-
-export { isLoggedIn, isNotLoggedin };

@@ -1,22 +1,36 @@
-import { Router } from 'express';
-import { getBlog, getEntry, createPost, formBlog, formUpdate, postUpdate, deleteEntry, blogs } from '../controllers/blog.controller.js';
-import { isLoggedIn } from '../libs/logged.js';
-import { verifyToken } from '../middlewares/authjwt.js';
-const router = Router(); // GET ENTRIES / PUBLIC
+"use strict";
 
-router.get('/all', verifyToken, getBlog); // GET ONLY ONE
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-router.get('/all/:id', verifyToken, getEntry); // VIEW ENTRIES BLOG
+var _express = require("express");
 
-router.get('/view', isLoggedIn, blogs); // GET CREATE
+var _blogController = require("../controllers/blog.controller.js");
 
-router.get('/add', isLoggedIn, formBlog); // POST CREATE / PRIVATE
+var _logged = require("../libs/logged.js");
 
-router.post('/add', isLoggedIn, createPost); // GET UPADATE / PRIVATE
+var _authjwt = require("../middlewares/authjwt.js");
 
-router.get('/update/:id', isLoggedIn, formUpdate); // POST UPADATE / PRIVATE
+const router = (0, _express.Router)(); // GET ENTRIES / PUBLIC
 
-router.post('/update/:id', isLoggedIn, postUpdate); // DELETE / PRIVATE
+router.get('/all', _authjwt.verifyToken, _blogController.getBlog); // GET ONLY ONE
 
-router.get('/delete/:id', isLoggedIn, deleteEntry);
-export default router;
+router.get('/all/:id', _authjwt.verifyToken, _blogController.getEntry); // VIEW ENTRIES BLOG
+
+router.get('/view', _logged.isLoggedIn, _blogController.blogs); // GET CREATE
+
+router.get('/add', _logged.isLoggedIn, _blogController.formBlog); // POST CREATE / PRIVATE
+
+router.post('/add', _logged.isLoggedIn, _blogController.createPost); // GET UPADATE / PRIVATE
+
+router.get('/update/:id', _logged.isLoggedIn, _blogController.formUpdate); // POST UPADATE / PRIVATE
+
+router.post('/update/:id', _logged.isLoggedIn, _blogController.postUpdate); // DELETE / PRIVATE
+
+router.get('/delete/:id', _logged.isLoggedIn, _blogController.deleteEntry); // DELETE / PRIVATE
+
+router.get('/delete/:img', _logged.isLoggedIn, _blogController.deleteImg);
+var _default = router;
+exports.default = _default;

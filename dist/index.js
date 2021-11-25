@@ -1,8 +1,16 @@
-import app from './app.js';
-import dotenv from 'dotenv';
-dotenv.config(); // SETTING
+"use strict";
 
-app.set('port', process.env.PORT || 3000); // TODO: Change port
+var _app = require("./app.js");
+
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_dotenv.default.config(); // SETTING
+
+
+_app.app.set('port', process.env.PORT || 3000); // TODO: Change port
 // LISTEN
 
-app.listen(app.get('port'));
+
+_app.app.listen(_app.app.get('port'));
