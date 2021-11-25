@@ -3,7 +3,20 @@ import mysqlConnection from '../database.js'
 // API - GET ALL
 export const getBlog = async (req, res) => {
   const blogs = await mysqlConnection.query('SELECT * FROM blog')
-  res.json(blogs)
+  const {limit, category} = req.query
+  let limitBlog = [...blogs]
+  
+  // Limit number of blogs
+  if(limit){ 
+    limitBlog = limitBlog.slice(0, Number(limit))
+  }
+
+  // Search category of blog
+  if(category){s
+    limitBlog = limitBlog.filter(cat => cat.category === Number(category))
+  }
+
+  res.json({succes: true, data: limitBlog})
 }
 
 // API - GET JUST ONE
@@ -12,7 +25,7 @@ export const getEntry = async (req, res) => {
   const blog = await mysqlConnection.query('SELECT * FROM blog WHERE id = ?', [
     id
   ])
-  await res.json(blog)
+  await res.json({succes: true, data: blog})
 }
 
 // GET BLOG´S LIST
@@ -93,4 +106,12 @@ export const deleteEntry = async (req, res) => {
   const {id} = req.params
   await mysqlConnection.query('DELETE FROM blog WHERE id = ?', [id])
   res.redirect('/blog/view')
+}
+
+// DELETE IMG
+export const deleteImg = async (req, res) => {
+  const {img} = req.params
+  console.log(img)
+  await mysqlConnection.query('DELETE FROM blog WHERE img = ?', [img])
+  res.render(`/blog/update/${id}`)
 }

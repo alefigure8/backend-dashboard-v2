@@ -3,9 +3,9 @@
 <h3 class="category__title">Añadir una nueva categoría</h2>
 
 <div class="main__category">
-    <form action="/category/add" method="POST" class="form__category">
+    <form action="/category/add" method="POST" class="form__category" enctype="multipart/form-data">
         <input type="text" name="name" id="categroy-name" placeholder="Añadir categoría">
-        <label class="custom-file-upload btn btn-dark category__button">
+        <label class="custom-file-upload btn btn-dark category__img">
         <input type="file" name="image" id="blog-img">
         Select File
         </label>

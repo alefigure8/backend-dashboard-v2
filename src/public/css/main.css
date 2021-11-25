@@ -124,6 +124,10 @@ h4 {
     display: flex;
 }
 
+p{
+    margin: 1rem 0;
+}
+
 table,
 tr,
 td,
@@ -131,6 +135,12 @@ th {
     margin: 0;
     border-collapse: collapse;
     padding: .3rem;
+}
+
+.fw {
+    display: block;
+    width: 100%;
+    text-align: center;
 }
 
 
@@ -639,7 +649,6 @@ input[type="file"] {
 .custom-file-upload {
     text-align: center;
     display: block;
-    padding: 6px 12px;
     cursor: pointer;
 }
 
@@ -651,33 +660,29 @@ Category
     width: 80%;
 }
 
+@media screen and (min-width: 960px) { 
+    .main__category {
+        width: 40%;
+    }
+}
+
+
 .form__category {
-    display: grid;
-    justify-items: end;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.category__button,
+    .category__img{
+        width: 100%;
+    }
 
 @media screen and (min-width: 960px) {
-    .form__category {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    #category-img,
-    #categroy-name {
-        flex: 0 0 calc(45% - 1rem);
-        margin: 0;
-    }
-}
-
-.category__button {
-    width: 20%;
-    margin: 1rem 0;
-}
-
-@media screen and (min-width: 960px) {
-    .category__button {
-        flex: 0 0 calc(10%);
-        margin: 0;
+    .category__button,
+    .category__img{
+        width: 70%;
     }
 }
 
