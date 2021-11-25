@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "build": "babel src -d dist",
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && node src/index.js",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles"
   },
   "keywords": [],
@@ -32,7 +32,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.4",
+    "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
     "@babel/eslint-parser": "^7.16.3",
     "@babel/node": "^7.15.4",
