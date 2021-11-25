@@ -24,7 +24,8 @@ export const viewCategory = async (req, res) => {
 
 // POST CREATE / PRIVATE
 export const postCategory = async (req, res) => {
-  const {name, img} = req.body
+  const {name} = req.body
+  const img = `/img/${req.file.filename}`
   const newCategory = {
     name,
     img
@@ -46,7 +47,8 @@ export const updateCategorybyId = async (req, res) => {
 // POST UPADATE / PRIVATE
 export const postCategorybyId = async (req, res) => {
   const {id} = req.params
-  const {name, img} = req.body
+  const img = `/img/${req.file.filename}`
+  const {name} = req.body
   const updateCategory = {
     name,
     img

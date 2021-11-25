@@ -32,10 +32,12 @@ export const createProject = async (req, res) => {
 
 // POST PROJECT ENTRY
 export const postProject = async (req, res) => {
-  const {title, description, category, img, link} = req.body
+  const img = `/img/${req.file.filename}`
+  const {title, description, category, link} = req.body
   const newPost = {
     title,
     description,
+    img,
     category,
     img,
     link
@@ -58,8 +60,9 @@ export const updateProjectbyId = async (req, res) => {
 
 // POST UPDATE
 export const updateProject = async (req, res) => {
+  const img = `/img/${req.file.filename}`
   const {id} = req.params
-  const {title, description, category, img, link} = req.body
+  const {title, description, category, link} = req.body
   const newPost = {
     title,
     description,

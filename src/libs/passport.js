@@ -47,7 +47,7 @@ passport.use(
         'SELECT * FROM users WHERE user = ?',
         [user]
       )
-      if (rows.length > 0) {
+       if (rows.length > 0) {
         const newUser = rows[0]
         const validPassword = await auth.matchPassword(
           password,

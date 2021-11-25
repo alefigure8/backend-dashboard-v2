@@ -66,7 +66,7 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage: storage })
+app.use(multer({ storage }).single('image'))
 
 // GLOBAL VARIABLES
 app.use((req, res, next) => {
@@ -75,7 +75,7 @@ app.use((req, res, next) => {
 })
 
 // ROUTES
-app.use('/blog', upload.single('image'), routeBlogs)
+app.use('/blog', routeBlogs)
 app.use('/category', routeCategory)
 app.use('/user', routeUser)
 app.use('/project', routeProyect)

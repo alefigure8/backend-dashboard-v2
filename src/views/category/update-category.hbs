@@ -1,12 +1,17 @@
 <h2>Category</h2>
 
-<h3 class="category__title">Añadir una nueva categoría</h2>
+<h3 class="category__title">Editar categoría</h2>
 
 <div class="main__category">
     {{#each category}}
-    <form action="/category/update/{{id}}" method="POST" class="form__category">
+    <form action="/category/update/{{id}}" method="POST" class="form__category" enctype="multipart/form-data">
         <input type="text" name="name" id="categroy-name" placeholder="Añadir categoría" value="{{name}}">
+        <img class="img-view" src="{{img}}" />
         <input type="text" name="img" id="category-img" placeholder="Añadir imagen. Max: 20x20px" value="{{img}}">
+         <label class="custom-file-upload btn btn-dark category__button">
+        <input type="file" name="image" id="blog-img">
+        Select File
+        </label>
         <button type="submit" class="btn btn-dark category__button">Actualizar</button>
     </form>
     {{/each}}

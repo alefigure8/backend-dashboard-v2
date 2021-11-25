@@ -7,7 +7,8 @@ import {
   formUpdate,
   postUpdate,
   deleteEntry,
-  blogs
+  blogs,
+  deleteImg
 } from '../controllers/blog.controller.js'
 import {isLoggedIn} from '../libs/logged.js'
 import {verifyToken} from '../middlewares/authjwt.js'
@@ -37,5 +38,9 @@ router.post('/update/:id', isLoggedIn, postUpdate)
 
 // DELETE / PRIVATE
 router.get('/delete/:id', isLoggedIn, deleteEntry)
+
+// DELETE / PRIVATE
+router.get('/delete/:img', isLoggedIn, deleteImg)
+
 
 export default router
