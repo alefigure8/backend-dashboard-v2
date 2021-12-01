@@ -80,7 +80,7 @@ app.use('/category', routeCategory)
 app.use('/user', routeUser)
 app.use('/project', routeProyect)
 app.get('/', (req, res) => {
-  res.redirect('/user')
+  res.status(301).redirect('/user')
 })
 
 // PUBLIC
