@@ -22,8 +22,8 @@ export const getBlog = async (req, res) => {
     if(category){
       limitBlog = limitBlog.filter(cat => cat.category === Number(category))
     }
-    
-    await client.set('blogs', JSON.stringify(blogs))
+
+    await client.set('blogs', JSON.stringify(blogs), {EX: 60*60*24})
     res.json({success: true, data: limitBlog})
   }
 }
@@ -39,10 +39,18 @@ export const getEntry = async (req, res) => {
 
 // GET BLOG´S LIST
 export const blogs = async (req, res) => {
-  const blogs = await mysqlConnection.query(
-    'SELECT blog.*, category.name FROM blog LEFT join category on blog.category = category.id'
-  )
-  res.render('./blog/blog', {blogs})
+  let blog = await client.get('blog')
+  if(blog){
+    blog = JSON.parse(blog)
+    res.render('./blog/blog', {blog})
+  } else {
+    const blog = await mysqlConnection.query(
+      'SELECT blog.*, category.name FROM blog LEFT join category on blog.category = category.id'
+    )
+    await client.set('blog', JSON.stringify(blog), {EX: 60*60*24})
+    res.render('./blog/blog', {blog})
+  }
+
 }
 
 // GET CREATE FORM
@@ -117,7 +125,7 @@ export const deleteEntry = async (req, res) => {
   res.redirect('/blog/view')
 }
 
-// DELETE IMG
+// DELETE IMG TODO
 export const deleteImg = async (req, res) => {
   const {img} = req.params
   console.log(img)
