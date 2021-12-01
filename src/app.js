@@ -17,13 +17,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 import multer from 'multer'
 dotenv.config()
-import redis from 'redis'
-
-//REDIS
-export const client = redis.createClient({
-  host: '127.0.0.1',
-  port: 6379
-})
 
 // INIT
 export const app = express()

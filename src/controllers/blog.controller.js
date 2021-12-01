@@ -1,33 +1,31 @@
 import mysqlConnection from '../database.js'
-import { client } from '../app.js'
+import client  from '../libs/redis.js'
+
 // API - GET ALL
 export const getBlog = async (req, res) => {
-  client.get('blogs', (err, reply) => {
-    if(error) console.log(error)
-    if(reply) 
-    return res.json({succes: true, data:JSON.parse(reply)})
-  })
-
-  const blogs = await mysqlConnection.query('SELECT * FROM blog')
   const {limit, category} = req.query
-  let limitBlog = [...blogs]
+  let result = await client.get('blogs')
 
-  client.set('blogs', JSON.stringify(blogs), (err, reply) => {
-    if(err) console.log(err)
+  if(result && !limit && !category){
+    res.json({succes: true, data: JSON.parse(result)})
+
+  } else {
+    const blogs = await mysqlConnection.query('SELECT * FROM blog')
+    let limitBlog = [...blogs]
     
-    console.log(reply)
-
-      // Limit number of blogs
+    // Limit number of blogs
     if(limit){ 
       limitBlog = limitBlog.slice(0, Number(limit))
     }
+
     // Search category of blog
-    if(category){s
+    if(category){
       limitBlog = limitBlog.filter(cat => cat.category === Number(category))
     }
-
-    res.json({succes: true, data: limitBlog})
-  })
+    
+    await client.set('blogs', JSON.stringify(blogs))
+    res.json({success: true, data: limitBlog})
+  }
 }
 
 // API - GET JUST ONE
