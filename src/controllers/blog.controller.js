@@ -81,16 +81,27 @@ export const formUpdate = async (req, res) => {
 // POST UPDATE
 export const postUpdate = async (req, res) => {
   try {
-    const img = `/img/${req.file.filename}`
+    const img = req?.file ? `/img/${req.file.filename}` : null
     const {id} = req.params
     const {title, description, field, user, category} = req.body
-    const newPost = {
-      title,
-      description,
-      field,
-      img,
-      user,
-      category
+    let newPost = {}
+    if (req.file) {
+      newPost = {
+        title,
+        description,
+        field,
+        img,
+        user,
+        category
+      }
+    } else {
+      newPost = {
+        title,
+        description,
+        field,
+        user,
+        category
+      }
     }
       await mysqlConnection.query('UPDATE blog set ? WHERE id = ?', [newPost, id])
       res.redirect('/blog/view')
