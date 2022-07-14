@@ -47,8 +47,7 @@
   "eslintConfig": {
     "extends": [
       "./node_modules/@s-ui/lint/eslintrc.js"
-    ],
-    "parser": "@typescript-eslint/parser"
+    ]
   },
   "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
   "stylelint": {
