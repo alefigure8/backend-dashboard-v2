@@ -5,14 +5,14 @@ export const getBlog = async (req, res) => {
   const blogs = await mysqlConnection.query('SELECT * FROM blog')
   const {limit, category} = req.query
   let limitBlog = [...blogs]
-  
+
   // Limit number of blogs
-  if(limit){ 
+  if (limit) {
     limitBlog = limitBlog.slice(0, Number(limit))
   }
 
   // Search category of blog
-  if(category){s
+  if (category) {
     limitBlog = limitBlog.filter(cat => cat.category === Number(category))
   }
 
@@ -46,15 +46,17 @@ export const formBlog = async (req, res) => {
 // POST ENTRY
 export const createPost = async (req, res) => {
   try {
-    const img = `/img/${req.file.filename}`
     const {title, description, field, user, category} = req.body
     const newPost = {
       title,
       description,
       field,
-      img,
       user,
       category
+    }
+
+    if (req.file) {
+      newPost.img = `/img/${req.file.filename}`
     }
 
     await mysqlConnection.query('INSERT INTO blog set ?', [newPost])
@@ -113,8 +115,7 @@ export const deleteEntry = async (req, res) => {
 
 // DELETE IMG
 export const deleteImg = async (req, res) => {
-  const {img} = req.params
-  console.log(img)
-  await mysqlConnection.query('DELETE FROM blog WHERE img = ?', [img])
+  const {id} = req.params
+  await mysqlConnection.query('DELETE FROM blog WHERE img = ?', [id])
   res.render(`/blog/update/${id}`)
 }
