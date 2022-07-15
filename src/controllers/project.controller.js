@@ -32,19 +32,24 @@ export const createProject = async (req, res) => {
 
 // POST PROJECT ENTRY
 export const postProject = async (req, res) => {
-  const img = `/img/${req.file.filename}`
-  const {title, description, category, link} = req.body
-  const newPost = {
-    title,
-    description,
-    img,
-    category,
-    img,
-    link
-  }
+  try {
+    const img = `/img/${req.file.filename}`
+    const {title, description, category, link} = req.body
+    const newPost = {
+      title,
+      description,
+      img,
+      category,
+      link
+    }
 
-  await mysqlConnection.query('INSERT INTO project set ?', [newPost])
-  res.redirect('/project/view')
+    await mysqlConnection.query('INSERT INTO project set ?', [newPost])
+    res.redirect('/project/view')
+  } catch (error) {
+    res.status(401).send({
+      message: `Error: ${error}`
+    })
+  }
 }
 
 // UPDATE PROYECT FORM
@@ -60,22 +65,27 @@ export const updateProjectbyId = async (req, res) => {
 
 // POST UPDATE
 export const updateProject = async (req, res) => {
-  const img = `/img/${req.file.filename}`
-  const {id} = req.params
-  const {title, description, category, link} = req.body
-  const newPost = {
-    title,
-    description,
-    category,
-    img,
-    link
+  try {
+    const img = `/img/${req.file.filename}`
+    const {id} = req.params
+    const {title, description, category, link} = req.body
+    const newPost = {
+      title,
+      description,
+      category,
+      img,
+      link
+    }
+    await mysqlConnection.query('UPDATE project set ? WHERE id = ?', [
+      newPost,
+      id
+    ])
+    res.redirect('/project/view')
+  } catch (error) {
+    res.status(401).send({
+      message: `Error: ${error}`
+    })
   }
-
-  await mysqlConnection.query('UPDATE project set ? WHERE id = ?', [
-    newPost,
-    id
-  ])
-  res.redirect('/project/view')
 }
 
 // DELETE ENTRY
