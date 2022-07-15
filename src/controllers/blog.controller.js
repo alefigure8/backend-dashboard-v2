@@ -72,7 +72,7 @@ export const createPost = async (req, res) => {
     res.redirect('/blog/view')
   } catch (error) {
     res.status(401).send({
-      message: `Error: ${error}`
+      message: `Error from create blog: ${error}`
     })
   }
 }
@@ -118,7 +118,7 @@ export const postUpdate = async (req, res) => {
     res.redirect('/blog/view')
   } catch (error) {
     res.status(401).send({
-      message: `Error: ${error}`
+      message: `Error from update post: ${error}`
     })
   }
 }
