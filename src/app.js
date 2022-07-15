@@ -60,13 +60,13 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, 'public/img'))
   },
-  filename: (req, file, cb)=>{
-    const ext = file.mimetype.split("/")[1]
-      cb(null, file.fieldname + '-' + Date.now()+ '.' + ext)
+  filename: (req, file, cb) => {
+    const ext = file.mimetype.split('/')[1]
+    cb(null, file.fieldname + '-' + Date.now() + '.' + ext)
   }
 })
 
-app.use(multer({ storage }).single('image'))
+app.use(multer({storage}).single('image'))
 
 // GLOBAL VARIABLES
 app.use((req, res, next) => {
