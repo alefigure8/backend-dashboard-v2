@@ -47,7 +47,7 @@ export const postProject = async (req, res) => {
     res.redirect('/project/view')
   } catch (error) {
     res.status(401).send({
-      message: `Error: ${error}`
+      message: `Error from post project: ${error}`
     })
   }
 }
@@ -83,7 +83,7 @@ export const updateProject = async (req, res) => {
     res.redirect('/project/view')
   } catch (error) {
     res.status(401).send({
-      message: `Error: ${error}`
+      message: `Error from update project: ${error}`
     })
   }
 }
