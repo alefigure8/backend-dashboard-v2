@@ -96,7 +96,7 @@ export const postUpdate = async (req, res) => {
     const {title, description, field, user, category} = req.body
     let newPost = {}
 
-    if (!req.file) {
+    if (!req?.file?.filename) {
       newPost = {
         title,
         description,
@@ -114,7 +114,7 @@ export const postUpdate = async (req, res) => {
         img: `/img/${req.file.filename}`
       }
     }
-    if(!req.file){
+    if (!req?.file?.filename) {
       console.log('No file');
     }
     await mysqlConnection.query('UPDATE blog set ? WHERE id = ?', [newPost, id])
