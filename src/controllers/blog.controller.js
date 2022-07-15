@@ -55,7 +55,7 @@ export const createPost = async (req, res) => {
       category
     }
 
-    if (req.file.filename) {
+    if (req?.file?.filename !== undefined) {
       newPost.img = `/img/${req.file.filename}`
     }
 
@@ -93,7 +93,7 @@ export const postUpdate = async (req, res) => {
       category
     }
 
-    if (req.file.filename !== undefined) {
+    if (req?.file?.filename !== undefined) {
       newPost.img = `/img/${req.file.filename}`
     }
 
