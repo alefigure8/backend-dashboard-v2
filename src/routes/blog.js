@@ -34,13 +34,12 @@ router.post('/add', isLoggedIn, createPost)
 router.get('/update/:id', isLoggedIn, formUpdate)
 
 // POST UPADATE / PRIVATE
-router.post('/update/:id', isLoggedIn, postUpdate)
+router.post('/update/:id', postUpdate)
 
 // DELETE / PRIVATE
 router.get('/delete/:id', isLoggedIn, deleteEntry)
 
 // DELETE / PRIVATE
 router.get('/delete/:img', isLoggedIn, deleteImg)
-
 
 export default router
