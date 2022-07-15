@@ -114,6 +114,9 @@ export const postUpdate = async (req, res) => {
         img: `/img/${req.file.filename}`
       }
     }
+    if(!req.file){
+      console.log('No file');
+    }
     await mysqlConnection.query('UPDATE blog set ? WHERE id = ?', [newPost, id])
     res.redirect('/blog/view')
   } catch (error) {
