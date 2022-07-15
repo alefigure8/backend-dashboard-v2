@@ -11,7 +11,7 @@
 <h4 class="blog__title">Editar entrada</h4>
 <div class="main__blog"></div>
 {{#each blogs}}
-    <form action="/blog/update/{{id}}" method="POST" class="blog__form" enctype = "multipart/form-data">
+    <form action="/blog/update/{{id}}" method="POST" class="blog__form" enctype="multipart/form-data">
         <div class="form__content-left">
             <input type="text" name="title" class="form-group" id="blog-title" value="{{title}}" placeholder="Añadir el título">
 
@@ -26,25 +26,19 @@
                     <h4>Publicar</h4>
                     <p id="dataNow"></p>
                     <div class="body__form-button">
-                    <button type="submit" class="btn btn-dark btn-form">Borrador</button>
-                    <button type="submit" class="btn btn-dark btn-form">Publicar</button>
+                    <button type="submit" class="btn btn-dark btn-form ">Publicar</button>
                     </div>
                 </div>
             </div>
             <div class="card card-form">
-
                 <div class="card-body card-body-form">
                     <h4>Imágenes</h4>
                     <img class="img-view" src="{{img}}" />
-                  {{!-- <a href="/blog/delete/{{img}}" class="btn btn-danger fw">Delete</a>
-                    <p>Link de la imagen</p>
-                    <input type="text" name="img" id="blog-img" value="{{img}}" placeholder="Añadir link">
                     <label class="custom-file-upload btn btn-dark btn-form">
                         <input type="file" name="image" id="blog-img">
                         Update File
-                    </label> --}}
+                    </label>
                 </div>
-
             </div>
             <div class="card card-form">
                 <div class="card-body card-body-form">
