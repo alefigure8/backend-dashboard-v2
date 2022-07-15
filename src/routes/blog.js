@@ -34,7 +34,7 @@ router.post('/add', isLoggedIn, createPost)
 router.get('/update/:id', isLoggedIn, formUpdate)
 
 // POST UPADATE / PRIVATE
-router.post('/update/:id', postUpdate)
+router.post('/update/:id', isLoggedIn, postUpdate)
 
 // DELETE / PRIVATE
 router.get('/delete/:id', isLoggedIn, deleteEntry)
