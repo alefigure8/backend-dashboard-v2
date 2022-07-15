@@ -47,16 +47,25 @@ export const formBlog = async (req, res) => {
 export const createPost = async (req, res) => {
   try {
     const {title, description, field, user, category} = req.body
-    const newPost = {
-      title,
-      description,
-      field,
-      user,
-      category
-    }
+    let newPost = {}
 
-    if (req?.file?.filename) {
-      newPost.img = `/img/${req.file.filename}`
+    if (!req.file) {
+      newPost = {
+        title,
+        description,
+        field,
+        user,
+        category
+      }
+    } else {
+      newPost = {
+        title,
+        description,
+        field,
+        user,
+        category,
+        img: `/img/${req.file.filename}`
+      }
     }
 
     await mysqlConnection.query('INSERT INTO blog set ?', [newPost])
@@ -85,18 +94,26 @@ export const postUpdate = async (req, res) => {
   try {
     const {id} = req.params
     const {title, description, field, user, category} = req.body
-    const newPost = {
-      title,
-      description,
-      field,
-      user,
-      category
-    }
+    let newPost = {}
 
-    if (req?.file?.filename) {
-      newPost.img = `/img/${req.file.filename}`
+    if (!req.file) {
+      newPost = {
+        title,
+        description,
+        field,
+        user,
+        category
+      }
+    } else {
+      newPost = {
+        title,
+        description,
+        field,
+        user,
+        category,
+        img: `/img/${req.file.filename}`
+      }
     }
-
     await mysqlConnection.query('UPDATE blog set ? WHERE id = ?', [newPost, id])
     res.redirect('/blog/view')
   } catch (error) {
