@@ -63,10 +63,6 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const ext = file.mimetype.split('/')[1]
     cb(null, file.fieldname + '-' + Date.now() + '.' + ext)
-  },
-  onError: (err, next) => {
-    console.log('Error', err)
-    next(err)
   }
 })
 
