@@ -2,68 +2,115 @@ import mysqlConnection from '../database.js'
 
 // GET categories / private
 export const getCategory = async (req, res) => {
-  const category = await mysqlConnection.query('SELECT * FROM category')
-  res.json(category)
+  try {
+    const category = await mysqlConnection.query('SELECT * FROM category')
+    res.json(category)
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from get category: ${error}`
+    })
+  }
 }
 
 // GET ONLY ONE / private
 export const getCategorybyId = async (req, res) => {
   const {id} = req.params
-  const category = await mysqlConnection.query(
-    'SELECT * FROM category WHERE id = ?',
-    [id]
-  )
-  res.json(category)
+  try {
+    const category = await mysqlConnection.query(
+      'SELECT * FROM category WHERE id = ?',
+      [id]
+    )
+    res.json(category)
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from get category by id: ${error}`
+    })
+  }
 }
 
 // VIEW CATEGORY LIST
 export const viewCategory = async (req, res) => {
-  const category = await mysqlConnection.query('SELECT * FROM category')
-  res.render('./category/category', {category})
+  try {
+    const category = await mysqlConnection.query('SELECT * FROM category')
+    res.render('./category/category', {category})
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from view category: ${error}`
+    })
+  }
 }
 
 // POST CREATE / PRIVATE
 export const postCategory = async (req, res) => {
   const {name} = req.body
-  const img = `/img/${req.file.filename}`
-  const newCategory = {
-    name,
-    img
+  try {
+    const newCategory = {
+      name
+    }
+
+    if (req?.file) {
+      newCategory.img = `/img/${req.file.filename}`
+    }
+
+    await mysqlConnection.query('INSERT INTO category set ?', [newCategory])
+
+    res.redirect('/category/view')
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from post category: ${error}`
+    })
   }
-  await mysqlConnection.query('INSERT INTO category set ?', [newCategory])
-  res.redirect('/category/view')
 }
 
 // GET UPADATE / PRIVATE
 export const updateCategorybyId = async (req, res) => {
   const {id} = req.params
-  const category = await mysqlConnection.query(
-    'SELECT * FROM category WHERE id = ?',
-    [id]
-  )
-  res.render('./category/update-category', {category})
+  try {
+    const category = await mysqlConnection.query(
+      'SELECT * FROM category WHERE id = ?',
+      [id]
+    )
+    res.render('./category/update-category', {category})
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from update category by id: ${error}`
+    })
+  }
 }
 
 // POST UPADATE / PRIVATE
 export const postCategorybyId = async (req, res) => {
   const {id} = req.params
-  const img = `/img/${req.file.filename}`
   const {name} = req.body
   const updateCategory = {
-    name,
-    img
+    name
   }
-  await mysqlConnection.query('UPDATE category set ? WHERE ID = ?', [
-    updateCategory,
-    id
-  ])
+  if (req?.file) {
+    updateCategory.img = `/img/${req.file.filename}`
+  }
 
-  res.redirect('/category/view')
+  try {
+    await mysqlConnection.query('UPDATE category set ? WHERE ID = ?', [
+      updateCategory,
+      id
+    ])
+    res.redirect('/category/view')
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from post category by id: ${error}`
+    })
+  }
 }
 
 // DELETE / PRIVATE
 export const deleteCategory = async (req, res) => {
   const {id} = req.params
-  await mysqlConnection.query('DELETE FROM category WHERE id = ?', [id])
-  res.redirect('/category/view')
+  try {
+    await mysqlConnection.query('DELETE FROM category WHERE id = ?', [id])
+    res.redirect('/category/view')
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from delete category: ${error}`
+    })
+  }
 }

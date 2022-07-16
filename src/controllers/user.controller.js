@@ -12,12 +12,24 @@ export const LoginUser = passport.authenticate('local.login', {
 })
 
 export const listUser = async (req, res) => {
-  const users = await mysqlConnection.query('SELECT * FROM users')
-  res.render('./auth/view-user', {users})
+  try {
+    const users = await mysqlConnection.query('SELECT * FROM users')
+    res.render('./auth/view-user', {users})
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from list user: ${error}`
+    })
+  }
 }
 
 export const deleteUser = async (req, res) => {
   const {id} = req.params
-  await mysqlConnection.query('DELETE FROM users WHERE id = ?', [id])
-  res.redirect('/user/view')
+  try {
+    await mysqlConnection.query('DELETE FROM users WHERE id = ?', [id])
+    res.redirect('/user/view')
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from delete user: ${error}`
+    })
+  }
 }

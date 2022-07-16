@@ -2,45 +2,71 @@ import mysqlConnection from '../database.js'
 
 // API - GET ALL
 export const getProject = async (req, res) => {
-  const projects = await mysqlConnection.query('SELECT * FROM project')
-  res.json(projects)
+  try {
+    const projects = await mysqlConnection.query('SELECT * FROM project')
+    res.json(projects)
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from get project: ${error}`
+    })
+  }
 }
 
 // API - GET JUST ONE BY ID
 export const getProjectbyId = async (req, res) => {
   const {id} = req.params
-  const project = await mysqlConnection.query(
-    'SELECT * FROM project WHERE id = ?',
-    [id]
-  )
-  res.json(project)
+  try {
+    const project = await mysqlConnection.query(
+      'SELECT * FROM project WHERE id = ?',
+      [id]
+    )
+    res.json(project)
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from get project by id: ${error}`
+    })
+  }
 }
 
 // GET PROJECT´S LIST
 export const viewProject = async (req, res) => {
-  const projects = await mysqlConnection.query(
-    'SELECT project.*, category.name FROM project LEFT join category on project.category = category.id'
-  )
-  res.render('./projects/view-projects', {projects})
+  try {
+    const projects = await mysqlConnection.query(
+      'SELECT project.*, category.name FROM project LEFT join category on project.category = category.id'
+    )
+    res.render('./projects/view-projects', {projects})
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from view project: ${error}`
+    })
+  }
 }
 
 // GET PROJECT CREATE FORM
 export const createProject = async (req, res) => {
-  const category = await mysqlConnection.query('SELECT * FROM category')
-  res.render('./projects/add-project', {category})
+  try {
+    const category = await mysqlConnection.query('SELECT * FROM category')
+    res.render('./projects/add-project', {category})
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from create project: ${error}`
+    })
+  }
 }
 
 // POST PROJECT ENTRY
 export const postProject = async (req, res) => {
   try {
-    const img = `/img/${req.file.filename}`
     const {title, description, category, link} = req.body
     const newPost = {
       title,
       description,
-      img,
       category,
       link
+    }
+
+    if (req?.file) {
+      newPost.img = `/img/${req.file.filename}`
     }
 
     await mysqlConnection.query('INSERT INTO project set ?', [newPost])
@@ -55,27 +81,36 @@ export const postProject = async (req, res) => {
 // UPDATE PROYECT FORM
 export const updateProjectbyId = async (req, res) => {
   const {id} = req.params
-  const projects = await mysqlConnection.query(
-    'SELECT * FROM project WHERE id = ?',
-    [id]
-  )
-  const category = await mysqlConnection.query('SELECT * FROM category')
-  res.render('./projects/update-project', {projects, category})
+  try {
+    const projects = await mysqlConnection.query(
+      'SELECT * FROM project WHERE id = ?',
+      [id]
+    )
+    const category = await mysqlConnection.query('SELECT * FROM category')
+    res.render('./projects/update-project', {projects, category})
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from update project by id: ${error}`
+    })
+  }
 }
 
 // POST UPDATE
 export const updateProject = async (req, res) => {
   try {
-    const img = `/img/${req.file.filename}`
     const {id} = req.params
     const {title, description, category, link} = req.body
     const newPost = {
       title,
       description,
       category,
-      img,
       link
     }
+
+    if (req?.file) {
+      newPost.img = `/img/${req.file.filename}`
+    }
+
     await mysqlConnection.query('UPDATE project set ? WHERE id = ?', [
       newPost,
       id
@@ -91,6 +126,12 @@ export const updateProject = async (req, res) => {
 // DELETE ENTRY
 export const deleteProject = async (req, res) => {
   const {id} = req.params
-  await mysqlConnection.query('DELETE FROM project WHERE id = ?', [id])
-  res.redirect('/project/view')
+  try {
+    await mysqlConnection.query('DELETE FROM project WHERE id = ?', [id])
+    res.redirect('/project/view')
+  } catch (error) {
+    res.status(401).send({
+      message: `Error from delete project: ${error}`
+    })
+  }
 }
