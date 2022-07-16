@@ -11,7 +11,6 @@ import routeBlogs from './routes/blog.js'
 import routeCategory from './routes/category.js'
 import routeUser from './routes/user.js'
 import routeProyect from './routes/projects.js'
-import multer from 'multer'
 import {fileURLToPath} from 'url'
 import './libs/passport.js'
 const __filename = fileURLToPath(import.meta.url)
@@ -55,18 +54,6 @@ app.use(express.urlencoded({extended: false}))
 app.use(passport.initialize())
 app.use(passport.session())
 app.disable('etag')
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, 'public/img'))
-  },
-  filename: (req, file, cb) => {
-    const ext = file.mimetype.split('/')[1]
-    cb(null, file.fieldname + '-' + Date.now() + '.' + ext)
-  }
-})
-
-app.use(multer({storage}).single('image'))
 
 // GLOBAL VARIABLES
 app.use((req, res, next) => {
