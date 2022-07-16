@@ -134,7 +134,7 @@ export const postUpdate = async (req, res) => {
       category
     }
 
-    // if (req?.file) {
+    // if (req?.file?.filename) {
     //   newPost.img = `/img/${req.file.filename}`
     // }
 

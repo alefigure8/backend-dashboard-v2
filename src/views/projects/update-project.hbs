@@ -11,7 +11,7 @@
 <h4 class="blog__title">Añadir un nuevo proyecto</h4>
 <div class="main__blog"></div>
 {{#each projects}}
-    <form action="/project/update/{{id}}" method="POST" class="blog__form">
+    <form action="/project/update/{{id}}" method="POST" class="blog__form" enctype = "multipart/form-data">
         <div class="form__content-left">
 
             <input type="text" name="title" class="form-group" id="blog-title" placeholder="Añadir el título" value="{{title}}">
