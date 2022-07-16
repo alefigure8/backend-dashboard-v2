@@ -12,6 +12,7 @@ import {
 } from '../controllers/blog.controller.js'
 import {isLoggedIn} from '../libs/logged.js'
 import {verifyToken} from '../middlewares/authjwt.js'
+import upload from '../middlewares/multer.js'
 
 const router = Router()
 
@@ -28,13 +29,13 @@ router.get('/view', isLoggedIn, blogs)
 router.get('/add', isLoggedIn, formBlog)
 
 // POST CREATE / PRIVATE
-router.post('/add', isLoggedIn, createPost)
+router.post('/add', isLoggedIn, upload.single('image'), createPost)
 
 // GET UPADATE / PRIVATE
 router.get('/update/:id', isLoggedIn, formUpdate)
 
 // POST UPADATE / PRIVATE
-router.post('/update/:id', isLoggedIn, postUpdate)
+router.post('/update/:id', isLoggedIn, upload.single('image'), postUpdate)
 
 // DELETE / PRIVATE
 router.get('/delete/:id', isLoggedIn, deleteEntry)

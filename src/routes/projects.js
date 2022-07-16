@@ -12,6 +12,7 @@ import {
 
 import {isLoggedIn} from '../libs/logged.js'
 import {verifyToken} from '../middlewares/authjwt.js'
+import upload from '../middlewares/multer.js'
 const router = Router()
 
 // API - GET ALL PROJECT
@@ -27,13 +28,13 @@ router.get('/view', isLoggedIn, viewProject)
 router.get('/add', isLoggedIn, createProject)
 
 // POST NEW PROJECT
-router.post('/add', isLoggedIn, postProject)
+router.post('/add', isLoggedIn, upload.single('image'), postProject)
 
 // GET UPDATE PROJECT FORM
 router.get('/update/:id', isLoggedIn, updateProjectbyId)
 
 // POST UPDATE
-router.post('/update/:id', isLoggedIn, updateProject)
+router.post('/update/:id', isLoggedIn, upload.single('image'), updateProject)
 
 // DELETE PROJECT
 router.get('/delete/:id', isLoggedIn, deleteProject)
