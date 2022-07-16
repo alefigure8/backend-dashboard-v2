@@ -125,26 +125,19 @@ export const postUpdate = async (req, res) => {
   try {
     const {id} = req.params
     const {title, description, field, user, category} = req.body
-    let newPost = {}
 
-    if (!req?.file?.filename) {
-      newPost = {
-        title,
-        description,
-        field,
-        user,
-        category
-      }
-    } else {
-      newPost = {
-        title,
-        description,
-        field,
-        user,
-        category,
-        img: `/img/${req.file.filename}`
-      }
+    const newPost = {
+      title,
+      description,
+      field,
+      user,
+      category
     }
+
+    // if (req?.file) {
+    //   newPost.img = `/img/${req.file.filename}`
+    // }
+
     await mysqlConnection.query('UPDATE blog set ? WHERE id = ?', [newPost, id])
     res.redirect('/blog/view')
   } catch (error) {
