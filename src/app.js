@@ -11,11 +11,11 @@ import routeBlogs from './routes/blog.js'
 import routeCategory from './routes/category.js'
 import routeUser from './routes/user.js'
 import routeProyect from './routes/projects.js'
+import multer from 'multer'
 import {fileURLToPath} from 'url'
 import './libs/passport.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-import multer from 'multer'
 dotenv.config()
 
 // INIT
