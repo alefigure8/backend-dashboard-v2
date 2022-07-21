@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 // SETTING
-app.set('port', process.env.PORT || 3000) // TODO: Change port
+app.set('port', process.env.PORT || 80)
 
 // LISTEN
 app.listen(app.get('port'))
