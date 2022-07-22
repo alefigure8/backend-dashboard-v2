@@ -11,7 +11,7 @@ const options = {
 }
 
 // SETTING
-app.set('port', process.env.PORT || 443)
+app.set('port', process.env.PORT || 8080)
 
 // LISTENING
 const server = http.createServer(options, app).listen(app.get('port'), () => {
