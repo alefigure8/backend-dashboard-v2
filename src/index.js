@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 // SETTING
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 3000
 
 // LISTENING
 const server = app.listen(port, () => {
