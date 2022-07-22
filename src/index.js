@@ -1,5 +1,5 @@
 import {app} from './app.js'
-import http from 'http'
+import https from 'https'
 import fs from 'fs'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -11,11 +11,10 @@ const options = {
 }
 
 // SETTING
-app.set('port', process.env.PORT || 8080)
 
 // LISTENING
-const server = http.createServer(options, app).listen(app.get('port'), () => {
-  console.log('Server listening on port ' + app.get('port'))
+const server = https.createServer(options, app).listen(443, () => {
+  console.log('Server listening on port ' + 443)
 })
 
 server.on('error', err => {
