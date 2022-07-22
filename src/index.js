@@ -6,12 +6,12 @@ dotenv.config()
 
 // CERTIFICATE
 const options = {
-  key: fs.createReadStream('src/certs/server.key'),
-  cert: fs.createReadStream('src/certs/server.cert')
+  key: fs.readFileSync('src/certs/server.key'),
+  cert: fs.readFileSync('src/certs/server.cert')
 }
 
 // SETTING
-app.set('port', process.env.PORT || 8080)
+app.set('port', process.env.PORT || 3000)
 
 // LISTENING
 const server = http
