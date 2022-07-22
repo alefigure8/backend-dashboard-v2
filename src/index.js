@@ -27,3 +27,7 @@ const httpServer = http.createServer(app).listen(port2, () => {
 httpsServer.on('error', err => {
   console.log(err)
 })
+
+httpServer.on('error', err => {
+  console.log(err)
+})
