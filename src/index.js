@@ -6,15 +6,19 @@ dotenv.config()
 
 // CERTIFICATE
 const options = {
-  key: fs.readFileSync('./certs/server-key.pem'),
-  cert: fs.readFileSync('./certs/server-cert.pem')
+  key: fs.createReadStream('src/certs/server.key'),
+  cert: fs.createReadStream('src/certs/server.cert')
 }
 
 // SETTING
-app.set('port', process.env.PORT || 80)
+app.set('port', process.env.PORT || 8080)
 
 // LISTENING
-const server = http.createServer(options, app).listen(app.get('port') || 80)
+const server = http
+  .createServer(options, app)
+  .listen(app.get('port') || 80, () => {
+    console.log('Server listening on port ' + app.get('port'))
+  })
 
 server.on('error', err => {
   console.log(err)
