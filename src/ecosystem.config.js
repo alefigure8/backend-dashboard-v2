@@ -1,8 +1,8 @@
 module.exports = {
   apps: [
     {
-      name: 'myapp',
-      script: './app.js',
+      name: 'dashboard',
+      script: './index.js',
       watch: true,
       env: {
         PORT: 3000,
