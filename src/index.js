@@ -12,7 +12,7 @@ const options = {
 }
 
 // SETTING
-const port = 8080
+const port = 443
 
 // LISTENING
 const server = https.createServer(options, app).listen(port, () => {
