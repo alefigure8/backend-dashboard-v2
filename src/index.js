@@ -8,7 +8,7 @@ dotenv.config()
 
 // CERTIFICATE
 const options = {
-  key: fs.readFileSync(path.join('./src/certs/ca.pem')),
+  key: fs.readFileSync(path.join('./src/certs/ca-key.pem')),
   cert: fs.readFileSync(path.join('./src/certs/cert.pem'))
 }
 
