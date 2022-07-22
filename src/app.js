@@ -19,7 +19,12 @@ dotenv.config()
 
 // INIT
 export const app = express()
-app.use(cors({origin: true, credentials: true}))
+app.use(
+  cors({
+    origin: 'https://ec2-3-17-9-183.us-east-2.compute.amazonaws.com',
+    credentials: true
+  })
+)
 
 // SETTINGS
 app.set('views', path.join(__dirname, 'views'))
