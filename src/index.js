@@ -8,9 +8,11 @@ dotenv.config()
 
 // CERTIFICATE
 const options = {
-  key: fs.readFileSync(path.join('./src/certs/ca-key.pem')),
+  key: fs.readFileSync(path.join('./src/certs/ca-cert-key.pem')),
   cert: fs.readFileSync(path.join('./src/certs/cert.pem')),
-  passphrase: '//7611&Pago//'
+  ca: fs.readFileSync(path.join('./src/certs/ca.pem')),
+  requestCert: true,
+  rejectUnauthorized: false
 }
 
 // SETTING
