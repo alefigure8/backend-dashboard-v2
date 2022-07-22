@@ -19,7 +19,7 @@ dotenv.config()
 
 // INIT
 export const app = express()
-const whiteList = ['https://ec2-3-17-9-183.us-east-2.compute.amazonaws.com', 'https://ec2-3-17-9-183.us-east-2.compute.amazonaws.com:3000']
+const whiteList = ['https://ec2-3-17-9-183.us-east-2.compute.amazonaws.com', 'https://ec2-3-17-9-183.us-east-2.compute.amazonaws.com:3000', 'https://portfolio-qqazkdxi1-alegomeznieto.vercel.app']
 const corsOptions = {
   origin: (origin, callback) => {
     if (whiteList.includes(origin)) {
