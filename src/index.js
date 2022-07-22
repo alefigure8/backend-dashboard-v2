@@ -11,10 +11,11 @@ const options = {
 }
 
 // SETTING
+const port = 443 || 8080
 
 // LISTENING
-const server = https.createServer(options, app).listen(443, () => {
-  console.log('Server listening on port ' + 443)
+const server = https.createServer(options, app).listen(port, () => {
+  console.log('Server listening on port ' + port)
 })
 
 server.on('error', err => {
