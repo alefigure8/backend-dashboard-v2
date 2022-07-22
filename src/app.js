@@ -19,12 +19,18 @@ dotenv.config()
 
 // INIT
 export const app = express()
-app.use(
-  cors({
-    origin: 'https://ec2-3-17-9-183.us-east-2.compute.amazonaws.com',
-    credentials: true
-  })
-)
+const whiteList = ['https://ec2-3-17-9-183.us-east-2.compute.amazonaws.com', 'https://ec2-3-17-9-183.us-east-2.compute.amazonaws.com:3000']
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whiteList.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors(corsOptions))
 
 // SETTINGS
 app.set('views', path.join(__dirname, 'views'))
