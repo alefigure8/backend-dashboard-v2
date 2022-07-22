@@ -5,7 +5,7 @@ import path, {dirname} from 'path'
 import session from 'express-session'
 import MySQLStore from 'express-mysql-session'
 import passport from 'passport'
-//import cors from 'cors'
+import cors from 'cors'
 import dotenv from 'dotenv'
 import routeBlogs from './routes/blog.js'
 import routeCategory from './routes/category.js'
@@ -19,7 +19,7 @@ dotenv.config()
 
 // INIT
 export const app = express()
-//app.use(cors())
+app.use(cors())
 
 // SETTINGS
 app.set('views', path.join(__dirname, 'views'))
