@@ -16,7 +16,6 @@
             <input type="text" name="title" class="form-group" id="blog-title" placeholder="Añadir el título">
 
             <textarea id="mytextarea" name="description"></textarea>
-            
         </div>
         <div class="form__content-right">
             <div class="card card-form">
@@ -32,23 +31,18 @@
             <div class="card card-form">
                 <div class="card-body card-body-form">
                     <h4>Imágenes</h4>
-                     <label class="custom-file-upload btn btn-dark btn-form">
-                        <input type="file" name="image" id="blog-img">
-                        Select File
-                    </label>
+                    <input type="text" name="img" id="blog-img" placeholder="Agrega un link">
                 </div>
             </div>
             <div class="card card-form">
                 <div class="card-body card-body-form">
                     <h4>Categoria</h4>
-                    
                     <input type="text" name="category" id="blog-category" placeholder="Añadir ID de Category" list="categories">
                     <datalist id="categories">
                         {{#each category}}
                         <option value="{{id}}">{{name}}</option>
                         {{/each}}
                     </datalist>
-                    
                 </div>
             </div>
             <div class="card card-form">

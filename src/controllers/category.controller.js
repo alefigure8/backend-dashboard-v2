@@ -42,14 +42,11 @@ export const viewCategory = async (req, res) => {
 
 // POST CREATE / PRIVATE
 export const postCategory = async (req, res) => {
-  const {name} = req.body
+  const {name, img} = req.body
   try {
     const newCategory = {
-      name
-    }
-
-    if (req?.file) {
-      newCategory.img = `/img/${req.file.filename}`
+      name,
+      img
     }
 
     await mysqlConnection.query('INSERT INTO category set ?', [newCategory])
@@ -81,12 +78,10 @@ export const updateCategorybyId = async (req, res) => {
 // POST UPADATE / PRIVATE
 export const postCategorybyId = async (req, res) => {
   const {id} = req.params
-  const {name} = req.body
+  const {name, img} = req.body
   const updateCategory = {
-    name
-  }
-  if (req?.file) {
-    updateCategory.img = `/img/${req.file.filename}`
+    name,
+    img
   }
 
   try {

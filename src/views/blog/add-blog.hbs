@@ -10,7 +10,7 @@ tinymce.init({
 
 <h4 class="blog__title">Añadir una nueva entrada</h4>
 <div class="main__blog"></div>
-    <form action="/blog/add" method="POST" class="blog__form" enctype="multipart/form-data">
+    <form action="/blog/add" method="POST" class="blog__form">
         <div class="form__content-left">
 
             <input type="text" name="title" class="form-group" id="blog-title" placeholder="Añadir el título">
@@ -18,7 +18,6 @@ tinymce.init({
             <input type="text" name="description" class="form-group"  id="blog-description" placeholder="Añadir una descripción">
 
             <textarea id="mytextarea" name="field"></textarea>
-
         </div>
         <div class="form__content-right">
             <div class="card card-form">
@@ -33,10 +32,7 @@ tinymce.init({
             <div class="card card-form">
                 <div class="card-body card-body-form">
                     <h4>Imágenes</h4>
-                    <label class="custom-file-upload btn btn-dark btn-form">
-                        <input type="file" name="image" id="blog-img">
-                        Select File
-                    </label>
+                    <input type="text" name="img" id="blog-img" placeholder="Link to image">
                 </div>
             </div>
             <div class="card card-form">
@@ -49,7 +45,6 @@ tinymce.init({
                         <option value="{{id}}">{{name}}</option>
                         {{/each}}
                     </datalist>
-               
                 </div>
             </div>
             <div class="card card-form">

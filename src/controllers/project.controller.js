@@ -57,16 +57,13 @@ export const createProject = async (req, res) => {
 // POST PROJECT ENTRY
 export const postProject = async (req, res) => {
   try {
-    const {title, description, category, link} = req.body
+    const {title, description, category, link, img} = req.body
     const newPost = {
       title,
       description,
       category,
-      link
-    }
-
-    if (req?.file) {
-      newPost.img = `/img/${req.file.filename}`
+      link,
+      img
     }
 
     await mysqlConnection.query('INSERT INTO project set ?', [newPost])
@@ -99,16 +96,13 @@ export const updateProjectbyId = async (req, res) => {
 export const updateProject = async (req, res) => {
   try {
     const {id} = req.params
-    const {title, description, category, link} = req.body
+    const {title, description, category, link, img} = req.body
     const newPost = {
       title,
       description,
       category,
-      link
-    }
-
-    if (req?.file) {
-      newPost.img = `/img/${req.file.filename}`
+      link,
+      img
     }
 
     await mysqlConnection.query('UPDATE project set ? WHERE id = ?', [
