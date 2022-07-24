@@ -40,6 +40,7 @@
                 <div class="card-body card-body-form">
                     <h4>Categoria</h4>
                     <input type="text" name="category" id="blog-category" placeholder="Añadir ID de Category" list="categories" value="{{category}}">
+    {{/each}}
                     <datalist id="categories">
                         {{#each category}}
                         <option value="{{id}}" label="{{name}}">{{name}}</option>
@@ -50,10 +51,11 @@
             <div class="card card-form">
                 <div class="card-body card-body-form">
                     <h4>Link</h4>
+                    {{#each projects}}
                     <input type="text" name="link" id="blog-category" placeholder="Añadir ID de User" value="{{link}}">
+                    {{/each}}
                 </div>
             </div>
         </div>
     </form>
-    {{/each}}
 </div>
