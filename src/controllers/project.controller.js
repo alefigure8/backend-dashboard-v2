@@ -97,6 +97,7 @@ export const updateProject = async (req, res) => {
   try {
     const {id} = req.params
     const {title, description, category, link, img} = req.body
+    console.log(req.body);
     const newPost = {
       title,
       description,

@@ -9,13 +9,11 @@
 <!-- BODY -->
 
 <h4 class="blog__title">Añadir un nuevo proyecto</h4>
-<div class="main__blog"></div>
+<div class="main__blog">
 {{#each projects}}
-    <form action="/project/update/{{id}}" method="POST" class="blog__form" enctype = "multipart/form-data">
+    <form action="/project/update/{{id}}" method="post" class="blog__form">
         <div class="form__content-left">
-
             <input type="text" name="title" class="form-group" id="blog-title" placeholder="Añadir el título" value="{{title}}">
-
             <textarea id="mytextarea" name="description">{{description}}</textarea>
         </div>
         <div class="form__content-right">
@@ -24,7 +22,6 @@
                     <h4>Publicar</h4>
                     <p id="dataNow"></p>
                     <div class="body__form-button">
-                    <button type="submit" class="btn btn-dark btn-form">Borrador</button>
                     <button type="submit" class="btn btn-dark btn-form">Publicar</button>
                     </div>
                 </div>
@@ -38,22 +35,20 @@
             </div>
             <div class="card card-form">
                 <div class="card-body card-body-form">
+                    <h4>Link</h4>
+                    <input type="text" name="link" id="blog-category" placeholder="Añadir ID de User" value="{{link}}">
+                </div>
+            </div>
+            <div class="card card-form">
+                <div class="card-body card-body-form">
                     <h4>Categoria</h4>
                     <input type="text" name="category" id="blog-category" placeholder="Añadir ID de Category" list="categories" value="{{category}}">
-    {{/each}}
+{{/each}}
                     <datalist id="categories">
                         {{#each category}}
                         <option value="{{id}}" label="{{name}}">{{name}}</option>
                         {{/each}}
                     </datalist>
-                </div>
-            </div>
-            <div class="card card-form">
-                <div class="card-body card-body-form">
-                    <h4>Link</h4>
-                    {{#each projects}}
-                    <input type="text" name="link" id="blog-category" placeholder="Añadir ID de User" value="{{link}}">
-                    {{/each}}
                 </div>
             </div>
         </div>

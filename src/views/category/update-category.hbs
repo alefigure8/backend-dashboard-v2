@@ -4,9 +4,9 @@
 
 <div class="main__category">
     {{#each category}}
-    <form action="/category/update/{{id}}" method="POST" class="form__category" enctype="multipart/form-data">
+    <form action="/category/update/{{id}}" method="POST" class="form__category">
         <input type="text" name="name" id="categroy-name" placeholder="Añadir categoría" value="{{name}}">
-        <img class="img-view" src="{{img}}" />
+        <img class="img-view" src="{{img}}"/>
         <input type="text" name="img" id="category-img" placeholder="Añadir imagen. Max: 20x20px" value="{{img}}">
         <button type="submit" class="btn btn-dark category__button">Actualizar</button>
     </form>

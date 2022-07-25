@@ -3,9 +3,9 @@
 <h3 class="category__title">Añadir una nueva categoría</h2>
 
 <div class="main__category">
-    <form action="/category/add" method="POST" class="form__category" enctype="multipart/form-data">
+    <form action="/category/add" method="POST" class="form__category">
         <input type="text" name="name" id="categroy-name" placeholder="Añadir categoría">
-        <input type="text" name="img" id="blog-img" placeholder="A�adir un link">
+        <input type="text" name="img" id="blog-img" placeholder="Añadir un link">
         <button type="submit" class="btn btn-dark category__button">Crear</button>
     </form>
 </div>
@@ -31,7 +31,7 @@
 
 
 {{else}}
-<p>Aú no hay entradas de blog</p>
+<p>no hay entradas de blog</p>
 
 {{/each}}
 
